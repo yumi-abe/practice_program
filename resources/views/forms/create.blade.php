@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <section class="text-gray-600 body-font relative">
                     {{-- 問い合わせフォーム --}}
-                        <form method="post" action="">
+                        <form method="post" action="{{ route('forms.store') }}">
                             @csrf
                             <div class="container px-5 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -33,18 +33,38 @@
                                     <div>
                                         <label for="plan_category" class="leading-7 text-sm text-gray-600">プラン選択</label>
                                     </div>
+                                    {{-- データベースより値を持ってくる --}}
                                     <select name="plan_category">
                                         <option value="">選択してください</option>
-                                        <option value="1">30分1ドリンク付き</option>
-                                        <option value="2">60分1ドリンク付き</option>
-                                        <option value="3">時間無制限フリードリンク付き</option>
+                                        {{-- <option value="1">30分コース</option>
+                                        <option value="2">60分コース</option>
+                                        <option value="3">フリータイム</option> --}}
+                                        @foreach ($plans as $id => $name)
+                                            <option value='{{ $id }}'>{{ $name }}</option>
+                                        @endforeach
                                     </select>
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
                                     <div class="relative">
-                                    <label for="email" class="leading-7 text-sm text-gray-600">予約希望日</label>
-                                    <input type="datetime-local" id="reserve_date" name="reserve_date" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <div>
+                                        <label for="cast_category" class="leading-7 text-sm text-gray-600">キャスト選択</label>
+                                    </div>
+                                    <select name="cast_category">
+                                        <option value="">選択してください</option>
+                                        {{-- <option value="1">あんこ</option>
+                                        <option value="2">おもち</option>
+                                        <option value="3">フリータイム</option> --}}
+                                        @foreach ($casts as $id => $name)
+                                            <option value='{{ $id }}'>{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="p-2 w-full">
+                                    <div class="relative">
+                                    <label for="date" class="leading-7 text-sm text-gray-600">予約希望日</label>
+                                    <input type="datetime-local" id="date" name="date" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     </div>
                                 </div>
 

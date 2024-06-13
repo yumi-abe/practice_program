@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CastCategory;
+use App\Models\PlanCategory;
 use Illuminate\Http\Request;
+use App\Models\ReserveForm;
+
 
 class ReserveFormController extends Controller
 {
@@ -23,7 +27,19 @@ class ReserveFormController extends Controller
      */
     public function create()
     {
-        return view('forms.create');
+        // 取得したいIDのクエリを準備する
+        $castsQuery = CastCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
+        $plansQuery = PlanCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
+
+        // 上記のIDに対応する行のidをキー、nameを値とする配列を取得
+        $casts = $castsQuery->pluck('cast_name', 'id');
+        $plans = $plansQuery->pluck('plan_name', 'id');
+
+        // dd($casts);
+
+        return view('forms.create', compact('casts','plans'));
+        // return view("form", compact('values'));
+
         
     }
 
@@ -35,7 +51,18 @@ class ReserveFormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request, $request->name);
+
+        ReserveForm::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'plan_category_id' => $request->plan_category,
+            'cast_category_id' => $request->cast_category,
+            'date' => $request->date,
+            'message' => $request->message,
+        ]);
+
+        return to_route('forms.index');
     }
 
     /**

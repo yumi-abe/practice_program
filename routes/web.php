@@ -25,7 +25,8 @@ Route::prefix('forms') // 頭に forms をつける
  ->controller(ReserveFormController::class) // コントローラ指定(laravel9から)
  ->group(function(){ // グループ化
  Route::get('/', 'index')->name('index'); // 名前つきルート
- Route::get('/create', 'create')->name('create'); // 名前つきルート
+ Route::get('/create', 'create')->name('create'); 
+ Route::post('/', 'store')->name('store');
 
 });
 

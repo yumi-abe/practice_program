@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class ReserveForm extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'plan_category_id',
+        'cast_category_id',
+        'date',
+        'message',
+
+    ];
+
+    
+    public function planCategory()
+    {
+        return $this->belongsTo(PlanCategory::class);
+    }
+
+    public function castCategory()
+    {
+        return $this->belongsTo(CastCategory::class);
+    }
 }

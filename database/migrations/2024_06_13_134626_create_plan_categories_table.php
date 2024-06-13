@@ -15,12 +15,7 @@ return new class extends Migration
     {
         Schema::create('plan_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-        });
-
-        Schema::create('cast_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 20);
+            $table->string('plan_name');
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('plan_categories');
     }
 };

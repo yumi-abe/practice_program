@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reserve_forms', function (Blueprint $table) {
+        Schema::create('cast_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-            $table->string('email', 255)->unique(); //emailが被らないようにする
-            $table->dateTime('date');//日時選択
-            $table->text('message', 255);//メッセージ
-            $table->timestamps();
+            $table->string('cast_name');
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reserve_forms');
+        Schema::dropIfExists('cast_categories');
     }
 };
