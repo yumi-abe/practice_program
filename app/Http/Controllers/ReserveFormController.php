@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CastCategory;
 use App\Models\PlanCategory;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use App\Models\ReserveForm;
 use Carbon\Carbon;
@@ -17,10 +20,18 @@ class ReserveFormController extends Controller
      */
     public function index()
     {
-        $reserveForms = ReserveForm::with(['planCategory', 'castCategory'])
-        ->get();
+        //ログイン中のIDを取得
+        $user_id = Auth::id();
 
-        // 日付をフォーマットする
+        // ログインIDに基づいて予約フォームデータを取得
+        $reserveForms = ReserveForm::where('user_id', $user_id)
+                        ->with(['planCategory', 'castCategory'])
+                        ->get();
+
+        // $reserveForms = ReserveForm::with(['planCategory', 'castCategory'])
+        // ->get();
+
+        // 日付をフォーマットする（秒なし）
         foreach ($reserveForms as $reserveForm) {
             $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
         }
@@ -35,9 +46,15 @@ class ReserveFormController extends Controller
      */
     public function create()
     {
-        // 取得したいIDのクエリを準備する
+        //ログイン中のユーザーの情報を取得（userテーブルのid,名前,メールアドレス）
+        $users = User::where('id', Auth::id())
+        ->select('id', 'name', 'email')
+        ->get();
+        // dd($users);
+
+        // プラン、キャストカテゴリIDのクエリを準備する
         $castsQuery = CastCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
-        $plansQuery = PlanCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
+        $plansQuery = PlanCategory::whereIn('id', range(1, 10)); 
 
         // 上記のIDに対応する行のidをキー、nameを値とする配列を取得
         $casts = $castsQuery->pluck('cast_name', 'id');
@@ -45,9 +62,7 @@ class ReserveFormController extends Controller
 
         // dd($casts);
 
-        return view('forms.create', compact('casts','plans'));
-        // return view("form", compact('values'));
-
+        return view('forms.create', compact('casts','plans', 'users'));
         
     }
 
@@ -59,8 +74,6 @@ class ReserveFormController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request, $request->name);
-
         ReserveForm::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -68,6 +81,7 @@ class ReserveFormController extends Controller
             'cast_category_id' => $request->cast_category,
             'date' => $request->date,
             'message' => $request->message,
+            'user_id' => Auth::id(), //ログインしているユーザーID
         ]);
 
         return to_route('forms.index');
@@ -81,7 +95,9 @@ class ReserveFormController extends Controller
      */
     public function show($id)
     {
-        //
+        $reserve = ReserveForm::find($id);
+
+        return view('forms.show', compact('reserve'))
     }
 
     /**
