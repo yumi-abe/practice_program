@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ReserveForm extends Model
 {
@@ -18,6 +19,15 @@ class ReserveForm extends Model
         'message',
 
     ];
+
+    // protected $casts = [
+    //     'date' => 'datetime:Y-m-d',
+    // ];
+
+    // public function getFormattedDateAttribute()
+    // {
+    //     return $this->date ? $this->date->format('Y-m-d H:i') : null;
+    // }
 
     
     public function planCategory()

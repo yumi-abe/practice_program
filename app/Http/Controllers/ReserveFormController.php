@@ -6,7 +6,7 @@ use App\Models\CastCategory;
 use App\Models\PlanCategory;
 use Illuminate\Http\Request;
 use App\Models\ReserveForm;
-
+use Carbon\Carbon;
 
 class ReserveFormController extends Controller
 {
@@ -17,7 +17,15 @@ class ReserveFormController extends Controller
      */
     public function index()
     {
-        return view('forms.index');
+        $reserveForms = ReserveForm::with(['planCategory', 'castCategory'])
+        ->get();
+
+        // 日付をフォーマットする
+        foreach ($reserveForms as $reserveForm) {
+            $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
+        }
+
+        return view('forms.index', compact('reserveForms'));
     }
 
     /**
