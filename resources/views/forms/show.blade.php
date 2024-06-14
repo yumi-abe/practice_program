@@ -23,14 +23,11 @@
                                         {{ $reserve->name }}
                                     </div>
                                 </div>
-                                <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
                                     <div class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="">
                                         {{ $reserve->email }}
                                     </div>
-                                </div>
-                                <div class="p-2 w-full">
                                     <div class="relative">
                                     <div>
                                         <label for="plan_category" class="leading-7 text-sm text-gray-600">プラン選択</label>
@@ -40,8 +37,6 @@
                                         {{ $plansId }}
                                     </div>
                                     </div>
-                                </div>
-                                <div class="p-2 w-full">
                                     <div class="relative">
                                     <div>
                                         <label for="cast_category" class="leading-7 text-sm text-gray-600">キャスト選択</label>
@@ -50,28 +45,21 @@
                                         {{ $castsId }}
                                     </div>
                                     </div>
-                                </div>
-                                <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="date" class="leading-7 text-sm text-gray-600">予約希望日</label>
                                     <div class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                         {{ $reserve->date }}
                                     </div>
-                                </div>
 
 
-                                <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="message" class="leading-7 text-sm text-gray-600">備考</label>
                                     <div id="message" name="message" class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $reserve->message }}</div>
                                     </div>
-                                </div>
-                                <div class="p-2 w-full">
                                     <a href="{{ route('forms.index') }}">
-                                        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button>
+                                        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 mt-4 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button>
                                     </a>
                                     
-                                </div>
                                 {{-- <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                                     <a class="text-indigo-500">example@email.com</a>
                                     <p class="leading-normal my-5">49 Smith St.
