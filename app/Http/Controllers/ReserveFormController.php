@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CastCategory;
 use App\Models\PlanCategory;
 use App\Models\User;
+use App\Services\FormService;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -33,8 +34,11 @@ class ReserveFormController extends Controller
 
         // 日付をフォーマットする（秒なし）
         foreach ($reserveForms as $reserveForm) {
-            $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
+             $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
         }
+        // $format_date = FormService::formatDate($reserveForms);
+
+        // dd($format_date);
 
         return view('forms.index', compact('reserveForms'));
     }
@@ -161,6 +165,10 @@ class ReserveFormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reserve = ReserveForm::find($id);
+        
+        $reserve->delete();
+
+        return to_route('forms.index');
     }
 }
