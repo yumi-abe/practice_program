@@ -125,7 +125,9 @@ class ReserveFormController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reserve = ReserveForm::find($id);
+        
+        return view('forms.edit', compact('reserve',));
     }
 
     /**
