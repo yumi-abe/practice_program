@@ -139,7 +139,18 @@ class ReserveFormController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reserve = ReserveForm::find($id);
+        // dd($reserve);
+
+        $reserve->name = $request->name;
+        $reserve->email = $request->email;
+        $reserve->plan_category_id = $request->plan_category;
+        $reserve->cast_category_id = $request->cast_category;
+        $reserve->date = $request->date;
+        $reserve->message = $request->message;
+        $reserve->save();
+
+        return to_route('forms.index');
     }
 
     /**
