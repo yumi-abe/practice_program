@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('plan_category_id');
             $table->unsignedBigInteger('cast_category_id');
             $table->timestamp('date');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->timestamps();
 
             $table->foreign('plan_category_id')->references('id')->on('plan_categories')->constrained();
