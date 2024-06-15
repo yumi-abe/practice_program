@@ -20,13 +20,13 @@
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="name" class="leading-7 text-sm text-gray-600">お名前</label>
-                                    <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $users[0]->name }}">
+                                    <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $users[0]->name }}">
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
-                                    <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $users[0]->email }}">
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $users[0]->email }}">
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
@@ -41,7 +41,7 @@
                                         <option value="2">60分コース</option>
                                         <option value="3">フリータイム</option> --}}
                                         @foreach ($plans as $id => $name)
-                                            <option value='{{ $id }}'>{{ $name }}</option>
+                                            <option value='{{ $id }}' {{old('plan_category') == $id ? 'selected' : '' }}>{{ $name }}</option>
                                         @endforeach
                                     </select>
                                     </div>
@@ -53,11 +53,11 @@
                                     </div>
                                     <select name="cast_category">
                                         <option value="">選択してください</option>
-                                        {{-- <option value="1">あんこ</option>
+                                        {{-- <option value="1" {{old('cast_category') == '1' ? 'selected' : '' }}>あんこ</option>
                                         <option value="2">おもち</option>
                                         <option value="3">フリータイム</option> --}}
                                         @foreach ($casts as $id => $name)
-                                            <option value='{{ $id }}'>{{ $name }}</option>
+                                            <option value='{{ $id }}' {{old('cast_category') == $id ? 'selected' : '' }}>{{ $name }}</option>
                                         @endforeach
                                     </select>
                                     </div>
@@ -65,7 +65,7 @@
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="date" class="leading-7 text-sm text-gray-600">予約希望日</label>
-                                    <input type="datetime-local" id="date" name="date" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input type="datetime-local" id="date" name="date" value="{{ old('date') }}" class="w-full mt-6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     </div>
                                 </div>
 
@@ -73,7 +73,7 @@
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <label for="message" class="leading-7 text-sm text-gray-600">備考</label>
-                                    <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                    <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('message') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="p-2 w-full mt-4 flex justify-evenly">
