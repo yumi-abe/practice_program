@@ -7,6 +7,7 @@ use App\Models\PlanCategory;
 use App\Models\User;
 use App\Services\FormService;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreFormRequest;
 
 use Illuminate\Http\Request;
 use App\Models\ReserveForm;
@@ -76,7 +77,7 @@ class ReserveFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFormRequest $request)
     {
         ReserveForm::create([
             'name' => $request->name,
@@ -141,7 +142,7 @@ class ReserveFormController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreFromRequest $request, $id)
     {
         $reserve = ReserveForm::find($id);
         // dd($reserve);
