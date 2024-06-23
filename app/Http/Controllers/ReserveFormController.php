@@ -142,7 +142,7 @@ class ReserveFormController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreFromRequest $request, $id)
+    public function update(StoreFormRequest $request, $id)
     {
         $reserve = ReserveForm::find($id);
         // dd($reserve);
