@@ -36,7 +36,7 @@ Route::prefix('forms') // 頭に forms をつける
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.logintest');
 });
 
 Route::get('/dashboard', function () {
