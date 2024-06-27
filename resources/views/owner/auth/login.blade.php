@@ -1,9 +1,9 @@
-{{-- <x-guesttest> --}}
-    <x-test-layout>
+<x-guest-layout>
+    オーナー用
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('user.login') }}">
+    <form method="POST" action="{{ route('owner.login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -34,8 +34,8 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            @if (Route::has('user.password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('user.password.request') }}">
+            @if (Route::has('owner.password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('owner.password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -45,6 +45,4 @@
             </x-primary-button>
         </div>
     </form>
-{{-- </x-guesttest> --}}
-</x-test-layout>
-
+</x-guest-layout>

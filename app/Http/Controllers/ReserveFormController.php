@@ -89,7 +89,7 @@ class ReserveFormController extends Controller
             'user_id' => Auth::id(), //ログインしているユーザーID
         ]);
 
-        return to_route('forms.index');
+        return to_route('user.forms.index');
     }
 
     /**
@@ -155,7 +155,7 @@ class ReserveFormController extends Controller
         $reserve->message = $request->message;
         $reserve->save();
 
-        return to_route('forms.index');
+        return to_route('user.forms.index');
     }
 
     /**
@@ -170,6 +170,6 @@ class ReserveFormController extends Controller
         
         $reserve->delete();
 
-        return to_route('forms.index');
+        return to_route('user.forms.index');
     }
 }

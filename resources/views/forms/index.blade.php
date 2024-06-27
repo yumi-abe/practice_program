@@ -31,7 +31,7 @@
                                     <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">{{ $reserveForm->formated_date }}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
                                     <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">{{ $reserveForm->CastCategory->cast_name }}</td> 
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900"><a class="text-blue-500" href="{{ route('forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></td>
+                                    <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900"><a class="text-blue-500" href="{{ route('user.forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></td>
                                   </tr>
                             @endforeach
                             
@@ -39,7 +39,7 @@
                         </table>
                       </div>
                 </div>
-                <a href="{{ route('forms.create') }}" class="text-blue-500">新規登録</a>
+                <a href="{{ route('user.forms.create') }}" class="text-blue-500">新規登録</a>
             </div>
         </div>
     </div>
