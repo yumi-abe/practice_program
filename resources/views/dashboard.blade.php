@@ -10,6 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    {{-- {{ Auth::user()->name }}さん、こんにちは
+                    <x-primary-button>
+                <a href="{{ route('user.forms.create') }}">お問い合わせ</a>
+                        
+                    </x-primary-button> --}}
                 </div>
             </div>
         </div>

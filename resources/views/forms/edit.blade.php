@@ -12,7 +12,7 @@
                     <x-input-error class="mb-4" :messages="$errors->all()"/>
                     <section class="text-gray-600 body-font relative">
                     {{-- 問い合わせフォーム --}}
-                        <form method="post" action="{{ route('forms.update', ['id' => $reserve->id]) }}">
+                        <form method="post" action="{{ route('user.forms.update', ['id' => $reserve->id]) }}">
                             @csrf
                             <div class="container px-5 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="p-2 w-full mt-4 flex justify-evenly">
-                                    <a href="{{ route('forms.show', [$reserve->id]) }}">
+                                    <a href="{{ route('user.forms.show', [$reserve->id]) }}">
                                         <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-14 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
                                     </a>
                                     <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">更新する</button>
