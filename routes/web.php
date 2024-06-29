@@ -36,12 +36,15 @@ Route::prefix('forms') // 頭に forms をつける
 
 
 Route::get('/', function () {
-    return view('auth.logintest');
+    return view('test');
+});
+Route::get('/welcome', function () {
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth:users'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

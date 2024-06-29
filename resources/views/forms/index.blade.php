@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-             予約履歴 
+        <h2 class="font-semibold text-xl text-white leading-tight">
+             ご予約一覧 
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="overflow-hidden sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
 
@@ -15,23 +15,25 @@
                         <table class="table-auto w-full text-left whitespace-no-wrap">
                           <thead>
                             <tr>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">ID</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">名前</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">予約日</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">プラン</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">キャスト</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">詳細</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300 rounded-tl rounded-bl">ID</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">名前</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約日</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">プラン</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">キャスト</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300 rounded-tr rounded-br">詳細</th>
                             </tr>
                           </thead>
                           <tbody>
                             @foreach ( $reserveForms as $reserveForm )
                             <tr>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{ $reserveForm->id }}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{ $reserveForm->name }}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">{{ $reserveForm->formated_date }}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">{{ $reserveForm->CastCategory->cast_name }}</td> 
-                                    <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900"><a class="text-blue-500" href="{{ route('forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></td>
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tl rounded-bl">{{ $reserveForm->id }}</td>
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->name }}</td>
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->formated_date }}</td>
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->CastCategory->cast_name }}</td> 
+                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tr rounded-br">
+                                      <x-primary-button><a class="" href="{{ route('user.forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></x-primary-button>
+                                    </td>
                                   </tr>
                             @endforeach
                             
@@ -39,8 +41,18 @@
                         </table>
                       </div>
                 </div>
-                <a href="{{ route('forms.create') }}" class="text-blue-500">新規登録</a>
+                <div class="text-center mb-10">
+                  {{-- <a href="{{ route('user.forms.create') }}" class="px-4 py-2 bg-brown-400 text-white rounded-md hover:bg-brown-200">新規予約</a> --}}
+                  <x-primary-button>
+                    <a class="text-sm" href="{{ route('user.forms.create') }}">新規ご予約</a>
+                  </x-primary-button>
+                </div>
+                {{-- <x-primary-button>
+                  <a href="{{ route('user.forms.create') }}">お問い合わせ</a>
+                </x-primary-button> --}}
             </div>
         </div>
     </div>
+
+    
 </x-app-layout>

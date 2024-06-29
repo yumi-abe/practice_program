@@ -20,9 +20,15 @@ module.exports = {
             },
             colors: {
                 body: "#d1b5b4",
-                brown: "#4f342c",
+                // brown: "#4f342c",
                 "pastel-pink": "#f9ece4",
-                
+                brown: {
+                    100: '#d3b58d',
+                    200: '#bc8f8f',
+                    300: '#9f512d',
+                    400: '#7b5544',
+                    500: '#4f342c',
+                  },
             }
         },
     },
