@@ -52,9 +52,12 @@
         </div>
       </div>
       <div class="text-center mt-6">
-        <a href="#">
-          <button type="button" class="text-2xl text-white bg-brown rounded-lg py-3 px-5">more</button>
-        </a>
+        {{-- <a href="#">
+          <button type="button" class="text-2xl text-white bg-brown-500 rounded-lg py-3 px-5">more</button>
+        </a> --}}
+        <x-primary-button>
+          <a class="text-base">more</a>
+        </x-primary-button>
       </div>
     </section>
     
