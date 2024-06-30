@@ -37,6 +37,8 @@ class ReserveFormController extends Controller
         foreach ($reserveForms as $reserveForm) {
              $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
         }
+
+
         // $format_date = FormService::formatDate($reserveForms);
 
         // dd($format_date);
