@@ -31,7 +31,7 @@ class ReserveFormController extends Controller
                         ->get();
 
         // $reserveForms = ReserveForm::with(['planCategory', 'castCategory'])
-        // ->get();
+        // ->get();FormatDate
 
         // 日付をフォーマットする（秒なし）
         foreach ($reserveForms as $reserveForm) {
@@ -102,11 +102,11 @@ class ReserveFormController extends Controller
      */
     public function show($id)
     {
-        $reserve = ReserveForm::find($id);
+
+        $reserve = FormService::CheckAccess($id);
+
         $planId = $reserve->plan_category_id ;
         $castsId = $reserve->cast_category_id ;
-
-        // dd($reserve, $planId, $castsId);
 
         // プラン、キャストカテゴリIDのクエリを準備する
         $castsQuery = CastCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
@@ -132,7 +132,7 @@ class ReserveFormController extends Controller
      */
     public function edit($id)
     {
-        $reserve = ReserveForm::find($id);
+        $reserve = FormService::CheckAccess($id);
         
         return view('forms.edit', compact('reserve',));
     }
@@ -146,8 +146,7 @@ class ReserveFormController extends Controller
      */
     public function update(StoreFormRequest $request, $id)
     {
-        $reserve = ReserveForm::find($id);
-        // dd($reserve);
+        $reserve = FormService::CheckAccess($id);
 
         $reserve->name = $request->name;
         $reserve->email = $request->email;
@@ -168,7 +167,7 @@ class ReserveFormController extends Controller
      */
     public function destroy($id)
     {
-        $reserve = ReserveForm::find($id);
+        $reserve = FormService::CheckAccess($id);
         
         $reserve->delete();
 
