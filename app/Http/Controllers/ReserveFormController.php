@@ -81,12 +81,18 @@ class ReserveFormController extends Controller
      */
     public function store(StoreFormRequest $request)
     {
+        $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
+
+        $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
+
         ReserveForm::create([
             'name' => $request->name,
             'email' => $request->email,
             'plan_category_id' => $request->plan_category,
             'cast_category_id' => $request->cast_category,
-            'date' => $request->date,
+            // 'date' => $request->date,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
             'message' => $request->message,
             'user_id' => Auth::id(), //ログインしているユーザーID
         ]);
@@ -119,9 +125,11 @@ class ReserveFormController extends Controller
         $plansId = $plans[$reserve->plan_category_id];
         $castsId = $casts[$reserve->cast_category_id];
 
+        $date = Carbon::parse($reserve->editEventDate)->format('Y年m月d日');
+
         // dd($casts, $plans, $plansId, $castsId);
 
-        return view('forms.show', compact('reserve', 'plansId', 'castsId'));
+        return view('forms.show', compact('reserve', 'plansId', 'castsId', 'date'));
     }
 
     /**
@@ -148,13 +156,21 @@ class ReserveFormController extends Controller
     {
         $reserve = FormService::CheckAccess($id);
 
+        $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
+
+        $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
+
         $reserve->name = $request->name;
         $reserve->email = $request->email;
         $reserve->plan_category_id = $request->plan_category;
         $reserve->cast_category_id = $request->cast_category;
-        $reserve->date = $request->date;
+        // $reserve->date = $request->date;
+        $reserve->start_date = $startDate;
+        $reserve->end_date = $endDate;
         $reserve->message = $request->message;
         $reserve->save();
+
+        session()->flash('status', '更新しました');
 
         return to_route('user.forms.index');
     }

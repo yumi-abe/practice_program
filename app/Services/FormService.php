@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\ReserveForm;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class FormService
@@ -26,6 +28,13 @@ class FormService
         }
 
         return $reserve;
+    }
+
+    public static function joinDateAndTime($date, $time)
+    {
+        $join = $date . " " . $time;
+        return Carbon::createFromFormat('Y-m-d H:i', $join);
+        // return $dataTime;
     }
 
 }

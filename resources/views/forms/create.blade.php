@@ -63,10 +63,23 @@
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
-                                    <div class="relative">
                                     <label for="date" class="leading-7 text-sm text-gray-600">予約希望日</label>
-                                    <input type="datetime-local" id="date" name="date" value="{{ old('date') }}" class="w-full mt-6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
+                                    <div class="md:flex justify-between gap-2">
+                                    {{-- <input type="datetime-local" id="date" name="date" value="{{ old('date') }}" class="w-full mt-6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"> --}}
+                                    <div class="py-2">
+                                        <p>日付</p>
+                                        <input class="sm:w-full" type="text" id="event_date" name="event_date">
                                     </div>
+                                    <div class="py-2">
+                                        <p>開始時間</p>
+                                        <input class="sm:w-full" type="text" id="start_time" name="start_time">
+                                    </div>
+                                    <div class="py-2">
+                                        <p>終了時間</p>
+                                        <input class="sm:w-full" type="text" id="end_time" name="end_time">
+                                    </div>
+                                </div>
                                 </div>
 
 
