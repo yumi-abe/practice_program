@@ -1,27 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
-    const selectedDateInput = document.getElementById('selectedDate'); //選択した時間をinputに反映
-    const endDateInput = document.getElementById('endDate'); //選択した時間をinputに反映（自動計算）
+    const selectedDateInput = document.getElementById('selectedDate'); // 選択した時間をinputに反映
+    const endDateInput = document.getElementById('endDate'); // 選択した時間をinputに反映（自動計算）
     const planCategory = document.getElementById('planCategory');
     const castCategory = document.getElementById('castCategory');
-    const calendarView = document.getElementById('calendarView'); //キャストを選択したらカレンダーを表示する用
+    const calendarView = document.getElementById('calendarView'); // キャストを選択したらカレンダーを表示する用
+
     let lastEvent = null; // 最後に選択した日時
     let lastEventData = null; // 最後に選択した日時のデータを保存
     let allEvents = []; // 全イベントデータを格納する変数を宣言
 
+
     // 今日の日付を取得
     const today = new Date();
     const todayISOString = today.toISOString().slice(0, 10); // "YYYY-MM-DD" 形式で今日の日付を取得
+    const currentStartDate = document.getElementById('currentStartDate') ? document.getElementById('currentStartDate').value : null;
+    const currentEndDate = document.getElementById('currentEndDate') ? document.getElementById('currentEndDate').value : null;
+
+
+    // 初期表示日付の設定
+    const initialDate = currentStartDate || todayISOString;
 
     // FullCalendar初期化
     const calendar = new FullCalendar.Calendar(calendarEl, {
         locale: 'ja',
         slotMinTime: '10:00:00',
         slotMaxTime: '19:00:00',
-        initialView: 'timeGridWeek', //週ごとに表示
+        initialView: 'timeGridWeek', // 週ごとに表示
+        initialDate: initialDate,
         timeZone: 'Asia/Tokyo',
         editable: false,
-        selectable: false,
+        selectable: true, // 新規予約時は true に設定
         eventOverlap: false,
         businessHours: true,
         dayMaxEvents: true,
@@ -30,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         displayEventTime: false,
         contentHeight: 'auto',
 
+
+        
         // 有効な日付範囲を設定
         validRange: {
             start: todayISOString
@@ -90,27 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedEndDate = new Date(selectedEndDate.getTime() + 180 * 60 * 1000); // 180分加算
             }
 
-            let isConflict = false;
-
-            // 既存のイベントと選択範囲の重複を確認
-            calendar.getEvents().forEach(event => {
-                let eventStart = event.start;
-                let eventEnd = event.end;
-
-                // 既存のイベントが選択範囲と重なるかをチェック
-                if (selectedStartDate < eventEnd && selectedEndDate > eventStart) {
-                    isConflict = true;
-                }
-            });
-
-            if (isConflict) {
-                alert('選択した時間枠は既存の予約と重複しているため、選択できません。');
-                calendar.unselect(); // 選択をキャンセル
-            } else {
-                // 選択が問題ない場合は、選択範囲を表示
-                selectedDateInput.value = selectedStartDate.toISOString().slice(0, 16).replace('T', ' ');
-                endDateInput.value = selectedEndDate.toISOString().slice(0, 16).replace('T', ' ');
-            }
+            
         },
 
         // 週が変更されたときの処理
@@ -159,6 +150,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 end: lastEventData.end,
                 rendering: 'background',
                 classNames: ['fc-bg-custom']
+            });
+        }
+
+        // 編集ページからの選択状態を設定 上手くいかない
+        if (currentStartDate && currentEndDate) {
+            calendar.addEvent({
+                start: new Date(currentStartDate),
+                end: new Date(currentEndDate),
+                rendering: 'background',
+                classNames: ['fc-bg-update'],
+                editable: true // 編集可能に設定
             });
         }
     }

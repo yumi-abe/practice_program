@@ -77,45 +77,6 @@ class BookingController extends Controller
         $result = $this->formService->createReservation($request);
 
         return $result;
-        // $result = $this->formService::createReservation($request);
-        // dd($result);
-        // return redirect()->back()->with($result['status'], $result['message']);
-        // $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
-
-        // $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
-
-
-        // $events = DB::table('reserve_forms')
-        //     ->where(function ($query) use ($request) {
-        //         $query->where('cast_category_id', '=', $request->cast_category)
-        //             ->where('start_date', '<', $request->end_time)
-        //             ->where('end_date', '>', $request->start_time);
-        //     })
-        //     ->get()
-        //     ->toArray();
-
-
-        // if (!empty($events)) {
-        //     session()->flash('error', 'この時間帯は既に他の予約が存在します。');
-        //     return to_route('user.booking.create');
-        // }
-
-
-        // ReserveForm::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'plan_category_id' => $request->plan_category,
-        //     'cast_category_id' => $request->cast_category,
-        //     // 'date' => $request->date,
-        //     'start_date' => $request->start_time,
-        //     'end_date' => $request->end_time,
-        //     'message' => $request->message,
-        //     'user_id' => Auth::id(), //ログインしているユーザーID
-        // ]);
-
-        session()->flash('status', '予約が完了しました。');
-
-        return to_route('user.booking.index');
     }
 
     /**
@@ -158,7 +119,14 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
+        //ログイン中のIDを取得
+        $user_id = Auth::id();
+
+
         $reserve = FormService::CheckAccess($id);
+
+        $reserve->formated_startDate = Carbon::parse($reserve->start_date)->format('Y年n月j日 H:i');
+        $reserve->formated_endDate = Carbon::parse($reserve->end_date)->format('H:i');
 
         return view('booking.edit', compact('reserve',));
     }
@@ -174,23 +142,9 @@ class BookingController extends Controller
     {
         $reserve = FormService::CheckAccess($id);
 
-        $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
+        $result = $this->formService->updateReservation($request, $reserve);
 
-        $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
-
-        $reserve->name = $request->name;
-        $reserve->email = $request->email;
-        $reserve->plan_category_id = $request->plan_category;
-        $reserve->cast_category_id = $request->cast_category;
-        // $reserve->date = $request->date;
-        $reserve->start_date = $startDate;
-        $reserve->end_date = $endDate;
-        $reserve->message = $request->message;
-        $reserve->save();
-
-        session()->flash('status', '更新しました');
-
-        return to_route('user.booking.index');
+        return $result;
     }
 
     /**

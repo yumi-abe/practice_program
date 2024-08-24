@@ -1,4 +1,14 @@
 <x-app-layout>
+
+@push('custom-css')
+<link rel="stylesheet" href="{{ asset('/css/calendar.css') }}">
+@endpush
+
+@push('custom-js')
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+<script src="{{ asset('/js/calendar.js') }}"></script>
+@endpush
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
              編集画面
@@ -12,30 +22,35 @@
                     <x-input-error class="mb-4" :messages="$errors->all()"/>
                     <section class="text-gray-600 body-font relative">
                     {{-- 問い合わせフォーム --}}
+                    @if (session('error'))
+                    <div class="mb-4 font-medium text-sm text-red-600 text-center">
+                        {{ session('error') }}
+                    </div>
+                    @endif
                         <form method="post" action="{{ route('user.booking.update', ['id' => $reserve->id]) }}">
                             @csrf
                             <div class="container px-5 mx-auto">
-                            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                                <div class="lg:w-2/3 md:w-3/4 mx-auto">
                                 <div class="flex flex-wrap -m-2">
                                 <div class="p-2 w-full">
                                     <div class="relative">
-                                    <label for="name" class="leading-7 text-sm text-gray-600">お名前</label>
+                                    <label for="name" class="leading-7 text-lg text-gray-600">お名前</label>
                                     <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $reserve->name }}">
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
                                     <div class="relative">
-                                    <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
+                                    <label for="email" class="leading-7 text-lg text-gray-600">メールアドレス</label>
                                     <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{ $reserve->email }}">
                                     </div>
                                 </div>
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <div>
-                                        <label for="plan_category" class="leading-7 text-sm text-gray-600">プラン選択</label>
+                                        <label for="plan_category" class="leading-7 text-lg text-gray-600">プラン選択</label>
                                     </div>
                                     {{-- データベースより値を持ってくる --}}
-                                    <select name="plan_category">
+                                    <select name="plan_category" id="planCategory">
                                         <option value="">選択してください</option>
                                         <option value="1" @if($reserve->plan_category_id == 1) selected @endif>30分コース</option>
                                         <option value="2" @if($reserve->plan_category_id == 2) selected @endif>60分コース</option>
@@ -49,9 +64,9 @@
                                 <div class="p-2 w-full">
                                     <div class="relative">
                                     <div>
-                                        <label for="cast_category" class="leading-7 text-sm text-gray-600">キャスト選択</label>
+                                        <label for="cast_category" class="leading-7 text-lg text-gray-600">キャスト選択</label>
                                     </div>
-                                    <select name="cast_category">
+                                    <select name="cast_category" id="castCategory">
                                         <option value="">選択してください</option>
                                         <option value="1" @if($reserve->cast_category_id == 1) selected @endif>あんこ</option>
                                         <option value="2" @if($reserve->cast_category_id == 2) selected @endif>おもち</option>
@@ -68,30 +83,30 @@
                                     <input type="datetime-local" id="date" name="date" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="{{$reserve->date}}">
                                     </div>
                                 </div> --}}
-                                <div class="p-2 w-full">
-                                    <label for="date" class="leading-7 text-sm text-gray-600">予約希望日</label>
+                                <div class="p-2 w-full" id="calendarView">
+                                    <input type="hidden" id="currentStartDate" value="{{ $reserve->start_date }}">
+                                    <input type="hidden" id="currentEndDate" value="{{ $reserve->end_date }}">
+                                    <label for="date" class="leading-7 text-lg text-gray-600">予約希望日 <small>※グレーの時間帯は埋まっています。</small></label>
+                                    <p class="text-sm text-gray-400 mt-2">変更前の日時:{{ $reserve->formated_startDate }}～{{ $reserve->formated_endDate }}</p>
+                                    <div class="bg-white" id='calendar'></div>
 
-                                    <div class="md:flex justify-between gap-2">
-                                    {{-- <input type="datetime-local" id="date" name="date" value="{{ old('date') }}" class="w-full mt-6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"> --}}
-                                    <div class="py-2">
-                                        <p>日付</p>
-                                        <input class="sm:w-full" type="text" id="event_date" name="event_date" value='{{ $reserve->editEventDate }}' required >
+                                    <div class="flex mt-2">
+
+                                        <div>
+                                            <label for="selectedDate">選択した日付:</label>
+                                            <input type="text" id="selectedDate" name="start_time" value="{{ $reserve->start_date }}" readonly>
+                                        </div>
+                                        <div>
+                                            <label for="endDate">　終了日時　:</label>
+                                            <input type="text" id="endDate" name="end_time" value="{{ $reserve->end_date }}" readonly>
+                                        </div>
                                     </div>
-                                    <div class="py-2">
-                                        <p>開始時間</p>
-                                        <input class="sm:w-full" type="text" id="start_time" name="start_time" value='{{ $reserve->startTime }}' required>
-                                    </div>
-                                    <div class="py-2">
-                                        <p>終了時間</p>
-                                        <input class="sm:w-full" type="text" id="end_time" name="end_time" value='{{ $reserve->endTime }}' required>
-                                    </div>
-                                </div>
                                 </div>
 
 
                                 <div class="p-2 w-full">
                                     <div class="relative">
-                                    <label for="message" class="leading-7 text-sm text-gray-600">備考</label>
+                                    <label for="message" class="leading-7 text-lg text-gray-600">備考</label>
                                     <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{$reserve->message}}</textarea>
                                     </div>
                                 </div>
