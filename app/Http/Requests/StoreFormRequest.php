@@ -29,7 +29,7 @@ class StoreFormRequest extends FormRequest
             'plan_category' => ['required'],
             'cast_category' => ['required'],
             // 'date' => ['required'],
-            'event_date' => ['required', 'date'],
+            // 'event_date' => ['required', 'date'],
             'start_time' => ['required'],
             'end_time' => ['required', 'after:start_time'],
             'message' => ['nullable'],
