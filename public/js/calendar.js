@@ -11,15 +11,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let allEvents = []; // 全イベントデータを格納する変数を宣言
 
 
-    // 今日の日付を取得
+    
     const today = new Date();
-    const todayISOString = today.toISOString().slice(0, 10); // "YYYY-MM-DD" 形式で今日の日付を取得
+    // 翌日の日付を取得
+    const tomomorrow = new Date(today);
+    tomomorrow.setDate(today.getDate() + 1);
+    const tomorrowISOString = tomomorrow.toISOString().slice(0, 10); // "YYYY-MM-DD" 形式で日付を取得
+    // 30日後の日付を取得
+    const futureDate = new Date(tomomorrow);
+    futureDate.setDate(tomomorrow.getDate() + 31);
+    const futureDateISOString = futureDate.toISOString().slice(0, 10);
     const currentStartDate = document.getElementById('currentStartDate') ? document.getElementById('currentStartDate').value : null;
     const currentEndDate = document.getElementById('currentEndDate') ? document.getElementById('currentEndDate').value : null;
 
 
     // 初期表示日付の設定
-    const initialDate = currentStartDate || todayISOString;
+    const initialDate = currentStartDate || tomorrowISOString;
 
     // FullCalendar初期化
     const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -43,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 有効な日付範囲を設定
         validRange: {
-            start: todayISOString
+            start: tomorrowISOString,
+            end: futureDateISOString
         },
 
         // 日付がクリックされたときのイベント

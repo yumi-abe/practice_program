@@ -61,17 +61,20 @@
                                         <a href="{{ route('user.booking.index') }}">
                                             <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
                                         </a>
+                                        @if($date >= \Carbon\Carbon::today()->format('Y年m月d日'))
                                         <form method="get" action="{{ route('user.booking.edit', ['id' => $reserve->id]) }}">
                                             <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
                                         </form>
+                                        @endif
                                     </div>
+                                    @if($date >= \Carbon\Carbon::today()->format('Y年m月d日'))
                                     <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
                                         @csrf
                                     <div class="p-2 w-full mt-4 flex justify-evenly">
-                                    <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">削除する</a>
+                                    <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">キャンセルする</a>
                                     </div>
                                     </form>
-                                    
+                                    @endif
                                 </div>
                             </div>
                             </div>

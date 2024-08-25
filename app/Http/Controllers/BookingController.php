@@ -17,25 +17,34 @@ use Carbon\Carbon;
 
 class BookingController extends Controller
 {
+    protected $formService;
+
+    public function __construct(FormService $formService)
+    {
+        $this->formService = $formService;
+    }
+
     public function index()
     {
+        $today = Carbon::today();
         //ログイン中のIDを取得
         $user_id = Auth::id();
 
-        // ログインIDに基づいて予約フォームデータを取得
+        // 今日以降の予約データを取得
         $reserveForms = ReserveForm::where('user_id', $user_id)
-            // ->with(['planCategory', 'castCategory'])
+            ->whereDate('start_date', '>', $today)
             ->orderBy('start_date', 'desc')
-            ->get();
+            ->paginate(5, ['*'], 'page');
+        FormService::formatDate($reserveForms);
 
-        // dd($reserveForms);
+        // 過去の予約データを取得
+        $pastReserveForms = ReserveForm::where('user_id', $user_id)
+            ->whereDate('start_date', '<', $today)
+            ->orderBy('start_date', 'desc')
+            ->paginate(5, ['*'], 'past_page');
+        FormService::formatDate($pastReserveForms);
 
-        // 日付をフォーマットする（秒なし）
-        foreach ($reserveForms as $reserveForm) {
-            $reserveForm->formated_startDate = Carbon::parse($reserveForm->start_date)->format('Y年n月j日 H:i');
-            $reserveForm->formated_endDate = Carbon::parse($reserveForm->end_date)->format('H:i');
-        }
-        return view('booking.index', compact('reserveForms'));
+        return view('booking.index', compact('reserveForms', 'pastReserveForms'));
     }
 
     public function create()
@@ -58,19 +67,6 @@ class BookingController extends Controller
         return view('booking.create', compact('casts', 'plans', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-    protected $formService;
-
-    public function __construct(FormService $formService)
-    {
-        $this->formService = $formService;
-    }
     public function store(StoreFormRequest $request)
     {
 
@@ -160,5 +156,10 @@ class BookingController extends Controller
         $reserve->delete();
 
         return to_route('user.booking.index');
+    }
+
+    public function past()
+    {
+        return view('booking.past',);
     }
 }

@@ -11,17 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class FormService
 {
-    // public static function formatDate($reserveForms){
+    public static function formatDate($reserveForms)
+    {
 
 
-    //     foreach ($reserveForms as $reserveForm) {
-    //         return $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
-    //     }
-    // }
+        foreach ($reserveForms as $reserveForm) {
+            $reserveForm->formated_startDate = Carbon::parse($reserveForm->start_date)->format('Y年m月d日 H:i');
+            $reserveForm->formated_endDate = Carbon::parse($reserveForm->end_date)->format('H:i');
+        }
+
+        return $reserveForms;
+    }
 
     public static function CheckAccess($id)
     {
         $reserve = ReserveForm::find($id);
+
+        // 予約が存在しない場合、404エラーページを表示
+        if (!$reserve) {
+            abort(404, 'このページは存在しません。');
+        }
 
         //他のユーザーがURLを直接入力しても見れないように
         if (Auth::id() !== $reserve->user_id) {
@@ -59,6 +68,13 @@ class FormService
                 session()->flash('error', 'この時間帯は既に他の予約が存在します。');
                 return to_route('user.booking.create');
             }
+
+            // $now = Carbon::now();
+            // foreach ($events as $event) {
+            //     if ($event->start_time > $now) {
+            //         session()->flash('error', '過去の時間は予約できません。');
+            //     }
+            // }
 
             // 重複がない場合、予約を登録
             ReserveForm::create([
