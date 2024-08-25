@@ -1,5 +1,22 @@
 {{-- <x-guesttest> --}}
     <x-test-layout>
+        <div class="text-center my-10">
+            <h2 class="text-2xl">Reserve</h2>
+            <p class="my-4">
+                ご予約にはアカウント作成が必要です。<br>
+                作成がまだの方はご登録お願いします。
+            </p>
+            <x-primary-button>
+                <a class="text-base" href="{{ route('user.register') }}">新規登録</a>
+            </x-primary-button>
+            {{-- <p class="my-4">
+                作成済みの方はログインページへお進みください。
+            </p>
+            <x-primary-button>
+                <a class="text-base" href="{{ route('user.login') }}">ログイン</a>
+            </x-primary-button> --}}
+            
+        </div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="w-3/4 lg:w-2/5  mx-auto my-10">
