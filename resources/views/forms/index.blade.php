@@ -8,9 +8,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">
+              @if (session('status'))
+                  <div class="mb-4 font-medium text-sm text-green-600">
+                      {{ session('status') }}
+                  </div>
+              @endif
                 <div class="p-6 text-gray-900">
-
-
+                  @if($reserveForms->isEmpty())
+                  <div class="bg-gray-200 rounded-lg text-center font-bold w-1/3 mx-auto">
+                    <p>予約がありません</p>
+                  </div>
+                    @else
                     <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                         <table class="table-auto w-full text-left whitespace-no-wrap">
                           <thead>
@@ -24,21 +32,23 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach ( $reserveForms as $reserveForm )
-                            <tr>
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tl rounded-bl">{{ $reserveForm->id }}</td>
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->name }}</td>
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->formated_date }}</td>
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->CastCategory->cast_name }}</td> 
-                                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tr rounded-br">
-                                      <x-primary-button><a class="" href="{{ route('user.forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></x-primary-button>
-                                    </td>
-                                  </tr>
-                            @endforeach
-                            
+                              @foreach ( $reserveForms as $reserveForm )
+                              <tr>
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tl rounded-bl">{{ $reserveForm->id }}</td>
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->name }}</td>
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->formated_date }}</td>
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->CastCategory->cast_name }}</td> 
+                                <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3 rounded-tr rounded-br">
+                                  <x-primary-button><a class="" href="{{ route('user.forms.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></x-primary-button>
+                                </td>
+                              </tr>
+                              @endforeach
+
                           </tbody>
                         </table>
+                        @endif
+
                       </div>
                 </div>
                 <div class="text-center mb-10">

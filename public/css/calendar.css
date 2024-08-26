@@ -1,0 +1,14 @@
+.fc-event-title {
+    display: none;
+}
+
+.fc-bg-custom {
+    background-color: #d1b5b4 !important; /* 新しい色 */
+}
+
+/* カレンダーの日付セルをグレーアウトするためのCSS */
+.fc-daygrid-day.fc-day-past {
+    background-color: #f0f0f0; /* グレーアウトの背景色 */
+    color: #b0b0b0; /* グレーアウトの日付の色 */
+    pointer-events: none; /* クリックを無効にする */
+}

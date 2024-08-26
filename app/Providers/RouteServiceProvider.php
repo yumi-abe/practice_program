@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/forms';
+    public const HOME = '/booking';
     public const OWNER_HOME = '/owner/dashboard';
 
 
@@ -36,15 +36,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::prefix('/')
-            ->as('user.') //いるか確認
-            ->middleware('web')
-            ->group(base_path('routes/web.php'));
+                ->as('user.') //いるか確認
+                ->middleware('web')
+                ->group(base_path('routes/web.php'));
 
-            
+
             Route::prefix('owner')
-            ->as('owner.')
-            ->middleware('web')
-            ->group(base_path('routes/owner.php'));
+                ->as('owner.')
+                ->middleware('web')
+                ->group(base_path('routes/owner.php'));
         });
     }
 

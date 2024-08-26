@@ -19,7 +19,9 @@ return new class extends Migration
             $table->text('email');
             $table->unsignedBigInteger('plan_category_id');
             $table->unsignedBigInteger('cast_category_id');
-            $table->timestamp('date');
+            // $table->timestamp('date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->text('message')->nullable();
             $table->timestamps();
 

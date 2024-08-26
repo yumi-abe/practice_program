@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Casts\Attribute; //アクセサ
+
 
 class ReserveForm extends Model
 {
@@ -16,7 +18,9 @@ class ReserveForm extends Model
         'email',
         'plan_category_id',
         'cast_category_id',
-        'date',
+        // 'date',
+        'start_date',
+        'end_date',
         'message',
         'user_id',
 
@@ -45,5 +49,26 @@ class ReserveForm extends Model
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected function startTime(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Carbon::parse($this->start_date)->format('H時i分')
+        );
+    }
+
+    protected function endTime(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Carbon::parse($this->end_date)->format('H時i分')
+        );
+    }
+
+    protected function editEventDate(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Carbon::parse($this->start_date)->format('Y-m-d')
+        );
     }
 }

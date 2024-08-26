@@ -31,12 +31,14 @@ class ReserveFormController extends Controller
                         ->get();
 
         // $reserveForms = ReserveForm::with(['planCategory', 'castCategory'])
-        // ->get();
+        // ->get();FormatDate
 
         // 日付をフォーマットする（秒なし）
         foreach ($reserveForms as $reserveForm) {
              $reserveForm->formated_date = Carbon::parse($reserveForm->date)->format('Y-m-d H:i');
         }
+
+
         // $format_date = FormService::formatDate($reserveForms);
 
         // dd($format_date);
@@ -79,12 +81,18 @@ class ReserveFormController extends Controller
      */
     public function store(StoreFormRequest $request)
     {
+        $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
+
+        $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
+
         ReserveForm::create([
             'name' => $request->name,
             'email' => $request->email,
             'plan_category_id' => $request->plan_category,
             'cast_category_id' => $request->cast_category,
-            'date' => $request->date,
+            // 'date' => $request->date,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
             'message' => $request->message,
             'user_id' => Auth::id(), //ログインしているユーザーID
         ]);
@@ -100,11 +108,11 @@ class ReserveFormController extends Controller
      */
     public function show($id)
     {
-        $reserve = ReserveForm::find($id);
+
+        $reserve = FormService::CheckAccess($id);
+
         $planId = $reserve->plan_category_id ;
         $castsId = $reserve->cast_category_id ;
-
-        // dd($reserve, $planId, $castsId);
 
         // プラン、キャストカテゴリIDのクエリを準備する
         $castsQuery = CastCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
@@ -117,9 +125,11 @@ class ReserveFormController extends Controller
         $plansId = $plans[$reserve->plan_category_id];
         $castsId = $casts[$reserve->cast_category_id];
 
+        $date = Carbon::parse($reserve->editEventDate)->format('Y年m月d日');
+
         // dd($casts, $plans, $plansId, $castsId);
 
-        return view('forms.show', compact('reserve', 'plansId', 'castsId'));
+        return view('forms.show', compact('reserve', 'plansId', 'castsId', 'date'));
     }
 
     /**
@@ -130,7 +140,7 @@ class ReserveFormController extends Controller
      */
     public function edit($id)
     {
-        $reserve = ReserveForm::find($id);
+        $reserve = FormService::CheckAccess($id);
         
         return view('forms.edit', compact('reserve',));
     }
@@ -144,16 +154,23 @@ class ReserveFormController extends Controller
      */
     public function update(StoreFormRequest $request, $id)
     {
-        $reserve = ReserveForm::find($id);
-        // dd($reserve);
+        $reserve = FormService::CheckAccess($id);
+
+        $startDate = FormService::joinDateAndTime($request['event_date'], $request['start_time']);
+
+        $endDate = FormService::joinDateAndTime($request['event_date'], $request['end_time']);
 
         $reserve->name = $request->name;
         $reserve->email = $request->email;
         $reserve->plan_category_id = $request->plan_category;
         $reserve->cast_category_id = $request->cast_category;
-        $reserve->date = $request->date;
+        // $reserve->date = $request->date;
+        $reserve->start_date = $startDate;
+        $reserve->end_date = $endDate;
         $reserve->message = $request->message;
         $reserve->save();
+
+        session()->flash('status', '更新しました');
 
         return to_route('user.forms.index');
     }
@@ -166,7 +183,7 @@ class ReserveFormController extends Controller
      */
     public function destroy($id)
     {
-        $reserve = ReserveForm::find($id);
+        $reserve = FormService::CheckAccess($id);
         
         $reserve->delete();
 
