@@ -7,6 +7,8 @@
 @push('custom-js')
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
 <script src="{{ asset('/js/calendar.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endpush
 
     <x-slot name="header">
@@ -19,7 +21,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <x-input-error class="mb-4" :messages="$errors->all()"/>
+                    <x-input-error class="mb-4 text-center" :messages="$errors->all()"/>
                     <section class="text-gray-600 body-font relative">
                     {{-- 問い合わせフォーム --}}
                     @if (session('error'))
@@ -86,8 +88,8 @@
                                 <div class="p-2 w-full" id="calendarView">
                                     <input type="hidden" id="currentStartDate" value="{{ $reserve->start_date }}">
                                     <input type="hidden" id="currentEndDate" value="{{ $reserve->end_date }}">
-                                    <label for="date" class="leading-7 text-lg text-gray-600">予約希望日 <small>※グレーの時間帯は埋まっています。</small></label>
-                                    <p class="text-sm text-gray-400 mt-2">変更前の日時:{{ $reserve->formated_startDate }}～{{ $reserve->formated_endDate }}</p>
+                                    <label for="date" class="leading-7 text-lg text-gray-600">予約希望日 <small class="text-gray-400">※グレーの時間帯は埋まっています。</small></label>
+                                    <p class="text-sm  mt-2 mb-2 font-bold text-body">変更前の日時:{{ $reserve->formated_startDate }}～{{ $reserve->formated_endDate }}</p>
                                     <div class="bg-white" id='calendar'></div>
 
                                     <div class="flex mt-2">

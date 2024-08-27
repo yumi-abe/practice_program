@@ -58,21 +58,27 @@
                                     <div id="message" name="message" class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $reserve->message }}</div>
                                     </div>
                                     <div class="p-2 w-full mt-4 flex justify-evenly">
-                                        <a href="{{ route('user.booking.index') }}">
-                                            <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
-                                        </a>
-                                        @if($date >= \Carbon\Carbon::today()->format('Y年m月d日'))
-                                        <form method="get" action="{{ route('user.booking.edit', ['id' => $reserve->id]) }}">
-                                            <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
-                                        </form>
-                                        @endif
+                                            <a href="{{ route('user.booking.index') }}">
+                                                <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
+                                            </a>
+                                            @if($date >= $today && $previousDay !== $today)
+                                            <form method="get" action="{{ route('user.booking.edit', ['id' => $reserve->id]) }}">
+                                                <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
+                                            </form>
+                                            @endif
                                     </div>
-                                    @if($date >= \Carbon\Carbon::today()->format('Y年m月d日'))
+                                    @if($date >= $today)
                                     <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
                                         @csrf
-                                    <div class="p-2 w-full mt-4 flex justify-evenly">
-                                    <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">キャンセルする</a>
+                                    @if ($previousDay === $today)
+                                    <div class="p-2 w-full mt-4 flex justify-evenly text-red-400">
+                                        キャンセル期限を過ぎています。<br>お電話にてお問い合わせください。
                                     </div>
+                                    @else
+                                    <div class="p-2 w-full mt-4 flex justify-evenly">
+                                        <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">キャンセルする</a>
+                                    </div>
+                                    @endif
                                     </form>
                                     @endif
                                 </div>

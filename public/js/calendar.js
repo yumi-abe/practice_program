@@ -1,3 +1,5 @@
+// import Swal from "sweetalert2";
+
 document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
     const selectedDateInput = document.getElementById('selectedDate'); // 選択した時間をinputに反映
@@ -13,19 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     const today = new Date();
-    // 翌日の日付を取得
+    // 翌日の日付を取得(翌日分から予約可能用)
     const tomomorrow = new Date(today);
     tomomorrow.setDate(today.getDate() + 1);
-    const tomorrowISOString = tomomorrow.toISOString().slice(0, 10); // "YYYY-MM-DD" 形式で日付を取得
-    // 30日後の日付を取得
+    // const tomorrowISOString = tomomorrow.toISOString().slice(0, 10); // "YYYY-MM-DD" 形式で日付を取得
+    const tomorrowISOString = tomomorrow.toLocaleDateString('sv-SE'); // "YYYY-MM-DD" 形式で日付を取得
+    
+    // 30日後の日付を取得(1か月先まで表示用)
     const futureDate = new Date(tomomorrow);
     futureDate.setDate(tomomorrow.getDate() + 31);
     const futureDateISOString = futureDate.toISOString().slice(0, 10);
+
+    //予約している場合の開始日時
     const currentStartDate = document.getElementById('currentStartDate') ? document.getElementById('currentStartDate').value : null;
     const currentEndDate = document.getElementById('currentEndDate') ? document.getElementById('currentEndDate').value : null;
 
 
-    // 初期表示日付の設定
+    // 初期表示日付の設定（予約されている場合はその日時を、されていない場合はデフォルト日時を）
     const initialDate = currentStartDate || tomorrowISOString;
 
     // FullCalendar初期化
@@ -39,15 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
         editable: false,
         selectable: true, // 新規予約時は true に設定
         eventOverlap: false,
-        businessHours: true,
-        dayMaxEvents: true,
+        // businessHours: true,
+        // dayMaxEvents: true,
         eventColor: '#76818d', // 全てのイベントの背景色
         eventBorderColor: '#76818d', // 全てのイベントの枠線の色
-        displayEventTime: false,
-        contentHeight: 'auto',
+        displayEventTime: false, //イベントの時間表示しない
+        contentHeight: 'auto', //カレンダー全体表示（スクロールしない）
 
-
-        
         // 有効な日付範囲を設定
         validRange: {
             start: tomorrowISOString,
@@ -56,14 +60,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 日付がクリックされたときのイベント
         dateClick: function(info) {
-            let date = info.date; // Dateオブジェクトを取得
+            let date = info.date;  // Dateオブジェクトを取得
             let selectedValue = planCategory.value;
-
             // 選択した日付をYYYY-MM-DD HH:MM形式に変換
-            let formattedDateTime = date.toISOString().slice(0, 16).replace('T', ' ');
+            let formattedDateTime = info.date.toISOString().slice(0, 16).replace('T', ' ');
+
             selectedDateInput.value = formattedDateTime; // フォームの入力フィールドに日時を設定
 
             let endDate = new Date(date); // 終了時間の初期値を設定
+
+            // endDate.setHours(endDate.getHours() - 9);
+
             // 選択したコースによって加算時間を変える
             if (selectedValue === "1") {
                 endDate.setMinutes(endDate.getMinutes() + 30); // 30分加算
@@ -72,6 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (selectedValue === "3") {
                 endDate.setMinutes(endDate.getMinutes() + 180); // 180分加算
             }
+
+
+
+
+
 
             // 最後に選択した日時を保存
             lastEventData = { start: date, end: endDate };
@@ -91,7 +103,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 終了日時をYYYY-MM-DD HH:MM形式に変換
             let formattedEndDateTime = endDate.toISOString().slice(0, 16).replace('T', ' ');
-            endDateInput.value = formattedEndDateTime; // 終了日時をフォームの入力フィールドに設定
+
+            // 営業終了時間
+            const limitTime = new Date(date);
+            limitTime.setHours(limitTime.getHours() - 9);
+            limitTime.setHours(19,0,0);
+
+            let endTime = new Date(endDate);
+            endTime.setHours(endTime.getHours() - 9);
+
+            if (endTime.getTime() > limitTime.getTime()) {
+                Swal.fire({
+                    html: '営業時間は19時までです。<br>営業時間内で選択してください。',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then(()=> {
+                    endDateInput.value = " ";
+                });
+            } else {
+                endDateInput.value = formattedEndDateTime; // 終了日時をフォームの入力フィールドに設定
+            }
         },
 
         // 範囲選択時の処理
