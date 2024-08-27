@@ -100,11 +100,14 @@ class BookingController extends Controller
         $plansId = $plans[$reserve->plan_category_id];
         $castsId = $casts[$reserve->cast_category_id];
 
+        $today = Carbon::today()->format('Y年m月d日');
         $date = Carbon::parse($reserve->editEventDate)->format('Y年m月d日');
+        $previousDay = Carbon::parse($reserve->editEventDate)->subDay()->format('Y年m月d日');
+
 
         // dd($casts, $plans, $plansId, $castsId);
 
-        return view('booking.show', compact('reserve', 'plansId', 'castsId', 'date'));
+        return view('booking.show', compact('reserve', 'plansId', 'castsId', 'date', 'today', 'previousDay'));
     }
 
     /**

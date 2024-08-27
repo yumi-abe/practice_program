@@ -7,6 +7,7 @@
     @push('custom-js')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
     <script src="{{ asset('/js/calendar.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
 
     <x-slot name="header">
@@ -19,9 +20,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <x-input-error class="mb-4" :messages="$errors->all()"/>
+                    <x-input-error class="mb-4 text-center" :messages="$errors->all()"/>
                     <section class="text-gray-600 body-font relative">
-
                         @if (session('error'))
                             <div class="mb-4 font-medium text-sm text-red-600 text-center">
                                 {{ session('error') }}
