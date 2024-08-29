@@ -16,7 +16,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="sm:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -101,11 +101,15 @@
                                     <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('message') }}</textarea>
                                     </div>
                                 </div>
-                                <div class="p-2 w-full mt-4 flex justify-evenly">
-                                    <a href="{{ route('user.booking.index') }}">
-                                        <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-16 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
-                                    </a>
-                                    <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規登録する</button>
+                                <div class="p-2 w-full mt-4 text-center flex flex-col gap-4 sm:justify-evenly">
+                                    <div>
+                                        <a href="{{ route('user.booking.index') }}">
+                                            <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded sm:text-lg">戻る</button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded sm:text-lg">新規登録する</button>
+                                    </div>
                                 </div>
                                 
                             </div>

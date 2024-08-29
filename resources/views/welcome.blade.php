@@ -1,4 +1,4 @@
- <x-test-layout>
+<x-home-layout>
     <div class="text-center my-10">
         <h2 class="text-2xl">Reserve</h2>
         <p class="my-4">
@@ -123,5 +123,5 @@
                 </div>
             </div>
         </div> --}}
-</x-test-layout>
+</x-home-layout>
 </html>

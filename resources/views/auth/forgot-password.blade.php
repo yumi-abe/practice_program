@@ -1,4 +1,4 @@
-<x-test-layout>
+<x-home-layout>
     <div class="flex flex-col justify-center w-3/4 lg:w-2/5 mx-auto">
         <div class="mt-8 mb-4 text-sm text-gray-600">
             ご登録いただいたメールアドレスを入力してください。<br>
@@ -25,4 +25,4 @@
             </div>
         </form>
     </div>
-</x-test-layout>
+</x-home-layout>

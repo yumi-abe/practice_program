@@ -16,7 +16,9 @@ class FormService
 
 
         foreach ($reserveForms as $reserveForm) {
+            $reserveForm->formated_Date = Carbon::parse($reserveForm->start_date)->format('Y年m月d日');
             $reserveForm->formated_startDate = Carbon::parse($reserveForm->start_date)->format('Y年m月d日 H:i');
+            $reserveForm->formated_startTime = Carbon::parse($reserveForm->start_date)->format('H:i');
             $reserveForm->formated_endDate = Carbon::parse($reserveForm->end_date)->format('H:i');
         }
 

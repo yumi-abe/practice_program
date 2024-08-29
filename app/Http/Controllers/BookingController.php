@@ -30,6 +30,8 @@ class BookingController extends Controller
         //ログイン中のIDを取得
         $user_id = Auth::id();
 
+
+
         // 今日以降の予約データを取得
         $reserveForms = ReserveForm::where('user_id', $user_id)
             ->whereDate('start_date', '>', $today)
