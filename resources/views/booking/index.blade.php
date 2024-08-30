@@ -8,19 +8,6 @@
   <script src="{{ asset('/js/swipe.js') }}"></script>
   @endpush
   
-{{-- <div class="slider-container">
-    <div class="slider">
-        <!-- ここにスライドとして表示する内容を一つずつ入れます -->
-        <div class="slide">予約情報1</div>
-        <div class="slide">予約情報2</div>
-        <div class="slide">予約情報3</div>
-        <!-- スライドが続く -->
-    </div>
-    <!-- 左右に移動するためのボタン -->
-    <button class="prev-slide">前へ</button>
-    <button class="next-slide">次へ</button>
-</div> --}}
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
              ご予約一覧 
@@ -31,7 +18,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">
               @if (session('status'))
-                  <div class="mb-4 font-medium text-sm text-green-600 text-center">
+                  <div class="mb-4 font-bold text-sm text-brown-400 bg-white text-center rounded-lg mx-auto w-2/3 lg:w-1/3">
                       {{ session('status') }}
                   </div>
               @endif

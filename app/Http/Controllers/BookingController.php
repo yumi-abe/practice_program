@@ -35,7 +35,7 @@ class BookingController extends Controller
         // 今日以降の予約データを取得
         $reserveForms = ReserveForm::where('user_id', $user_id)
             ->whereDate('start_date', '>', $today)
-            ->orderBy('start_date', 'desc')
+            ->orderBy('start_date', 'asc')
             ->paginate(5, ['*'], 'page');
         FormService::formatDate($reserveForms);
 
