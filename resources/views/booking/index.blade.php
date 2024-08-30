@@ -1,4 +1,26 @@
 <x-app-layout>
+
+  @push('custom-css')
+  <link rel="stylesheet" href="{{ asset('/css/swipe.css') }}">
+  @endpush
+
+  @push('custom-js')
+  <script src="{{ asset('/js/swipe.js') }}"></script>
+  @endpush
+  
+{{-- <div class="slider-container">
+    <div class="slider">
+        <!-- ここにスライドとして表示する内容を一つずつ入れます -->
+        <div class="slide">予約情報1</div>
+        <div class="slide">予約情報2</div>
+        <div class="slide">予約情報3</div>
+        <!-- スライドが続く -->
+    </div>
+    <!-- 左右に移動するためのボタン -->
+    <button class="prev-slide">前へ</button>
+    <button class="next-slide">次へ</button>
+</div> --}}
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
              ご予約一覧 
@@ -53,38 +75,42 @@
 
 
                 <!-- レスポンシブ予約一覧 -->
-                @foreach ( $reserveForms as $reserveForm )
-
-                <table class="md:hidden flex justify-center mb-4">
-                  <tbody>
-                    {{-- <tr>
-                      <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">名前</th>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->name }} 様</td>
-                    </tr> --}}
-                    <tr>
-                      <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約日時</th>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{$reserveForm->formated_Date}}<Br>{{ $reserveForm->formated_startTime }}～{{ $reserveForm->formated_endDate }}</td>
-                    </tr>
-                    <tr>
-                      <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">プラン</th>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
-                    </tr>
-                    <tr>
-                      <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">キャスト</th>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->CastCategory->cast_name }}</td>
-                    </tr>
-                    <tr>
-                      <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約詳細</th>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">
-                        <x-primary-button><a class="" href="{{ route('user.booking.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></x-primary-button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                @endforeach
+                <div class="slider-container">
+                  <div class="slider">
+                      @foreach ( $reserveForms as $reserveForm )
+                      <table class="md:hidden flex justify-center mb-4 slide">
+                          <tbody>
+                              <tr>
+                                  <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約日時</th>
+                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{$reserveForm->formated_Date}}<br>{{ $reserveForm->formated_startTime }}～{{ $reserveForm->formated_endDate }}</td>
+                              </tr>
+                              <tr>
+                                  <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">プラン</th>
+                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->planCategory->plan_name }}</td>
+                              </tr>
+                              <tr>
+                                  <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">キャスト</th>
+                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $reserveForm->CastCategory->cast_name }}</td>
+                              </tr>
+                              <tr>
+                                  <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約詳細</th>
+                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">
+                                      <x-primary-button><a href="{{ route('user.booking.show', ['id' => $reserveForm->id]) }}">詳細を見る</a></x-primary-button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      @endforeach
+                  </div>
+                  <div class="slider-buttons">
+                      <button class="prev-slide">前へ</button>
+                      <button class="next-slide">次へ</button>
+                  </div>
+              </div>
+              
                 <!-- /レスポンシブ予約一覧 -->
 
-                <div class="text-center mt-5 mb-14">
+                <div class="text-center sm:mt-5 mb-14">
                   {{-- <a href="{{ route('user.forms.create') }}" class="px-4 py-2 bg-brown-400 text-white rounded-md hover:bg-brown-200">新規予約</a> --}}
                   <x-primary-button>
                     <a class="text-sm" href="{{ route('user.booking.create') }}">新規ご予約</a>
