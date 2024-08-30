@@ -13,11 +13,11 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-             編集画面
+             ご予約内容変更
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="sm:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -88,18 +88,18 @@
                                 <div class="p-2 w-full" id="calendarView">
                                     <input type="hidden" id="currentStartDate" value="{{ $reserve->start_date }}">
                                     <input type="hidden" id="currentEndDate" value="{{ $reserve->end_date }}">
-                                    <label for="date" class="leading-7 text-lg text-gray-600">予約希望日 <small class="text-gray-400">※グレーの時間帯は埋まっています。</small></label>
-                                    <p class="text-sm  mt-2 mb-2 font-bold text-body">変更前の日時:{{ $reserve->formated_startDate }}～{{ $reserve->formated_endDate }}</p>
+                                    <label for="date" class="leading-7 text-lg text-gray-600">予約希望日 <small class="text-gray-400 block sm:inline ">※グレーの時間帯は埋まっています。</small></label>
+                                    <p class="text-sm  mt-2 mb-2 font-bold text-body">変更前の日時:<span class="block sm:inline">{{ $reserve->formated_startDate }}～{{ $reserve->formated_endDate }}</p>
                                     <div class="bg-white" id='calendar'></div>
 
-                                    <div class="flex mt-2">
+                                    <div class="sm:flex mt-2">
 
                                         <div>
                                             <label for="selectedDate">選択した日付:</label>
                                             <input type="text" id="selectedDate" name="start_time" value="{{ $reserve->start_date }}" readonly>
                                         </div>
-                                        <div>
-                                            <label for="endDate">　終了日時　:</label>
+                                        <div class="mt-2 sm:mt-0">
+                                            <label for="endDate">終了日時:</label>
                                             <input type="text" id="endDate" name="end_time" value="{{ $reserve->end_date }}" readonly>
                                         </div>
                                     </div>
@@ -112,9 +112,9 @@
                                     <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{$reserve->message}}</textarea>
                                     </div>
                                 </div>
-                                <div class="p-2 w-full mt-4 flex justify-evenly">
+                                <div class="p-2 w-full mt-4 flex flex-col items-center gap-2 sm:flex sm:flex-row sm:justify-evenly">
                                     <a href="{{ route('user.booking.show', [$reserve->id]) }}">
-                                        <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-14 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
+                                        <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-12 sm:px-14 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
                                     </a>
                                     <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">更新する</button>
                                 </div>

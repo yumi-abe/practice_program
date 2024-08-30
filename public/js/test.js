@@ -1,3 +1,4 @@
+const body = document.body;
 button.addEventListener('click', event => {
     bars.classList.toggle('hidden');
     xmark.classList.toggle('hidden');

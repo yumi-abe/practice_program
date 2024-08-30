@@ -1,4 +1,4 @@
-<x-test-layout>
+<x-home-layout>
     <div class="w-3/4 lg:w-2/5  mx-auto my-10">
         <form method="POST" action="{{ route('user.register') }}" class="flex flex-col">
             @csrf
@@ -50,4 +50,4 @@
             </div>
         </form>
     </div>
-</x-test-layout>
+</x-home-layout>

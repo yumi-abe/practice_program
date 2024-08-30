@@ -1,4 +1,4 @@
-    <x-test-layout>
+    <x-home-layout>
     <!-- メインビジュアル -->
     <div>
       <img
@@ -66,5 +66,5 @@
 
     {{-- <script src="{{ asset('js/test.js') }}"></script> --}}
 
-  </x-test-layout>
+  </x-home-layout>
 </html>

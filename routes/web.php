@@ -57,7 +57,7 @@ Route::get('/reservations/events', function () {
 });
 
 Route::get('/', function () {
-    return view('test');
+    return view('index');
 });
 Route::get('/welcome', function () {
     return view('welcome');

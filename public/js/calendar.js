@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // 編集ページからの選択状態を設定 上手くいかない
+        // 編集ページからの選択状態を設定 
         if (currentStartDate && currentEndDate) {
             calendar.addEvent({
                 start: new Date(currentStartDate),
