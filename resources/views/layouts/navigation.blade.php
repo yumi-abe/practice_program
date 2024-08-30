@@ -32,7 +32,9 @@
                     ユーザー情報
                 </x-dropdown-link>
                 @endif
-
+                <x-dropdown-link :href="url('/')">
+                    ホームページへ
+                </x-dropdown-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('user.logout') }}">
@@ -65,6 +67,7 @@
             @else
           <li><a href="{{ url('/profile') }}" class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">ユーザー情報</a></li>
             @endif
+          <li><a href="{{ url('/') }}" class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">ホームページへ</a></li>
           <li>
             <form method="POST" action="{{ route('user.logout') }}">
                 @csrf

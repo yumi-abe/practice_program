@@ -23,9 +23,10 @@
 
 .next-slide,
 .prev-slide {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: white;
+    color: rgb(131, 131, 131);
     border: none;
+    border-radius: 8px;
     padding: 10px;
     cursor: pointer;
 }

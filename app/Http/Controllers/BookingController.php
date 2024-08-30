@@ -165,6 +165,6 @@ class BookingController extends Controller
 
     public function past()
     {
-        return view('booking.past',);
+        return view('user.booking.past');
     }
 }
