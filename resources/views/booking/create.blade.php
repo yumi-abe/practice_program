@@ -83,13 +83,13 @@
 
                                     <div class="bg-white" id='calendar'></div>
 
-                                    <div class="flex mt-2">
+                                    <div class="md:flex mt-2">
                                         <div>
                                             <label for="selectedDate">選択した日付:</label>
                                             <input type="text" id="selectedDate" name="start_time" readonly>
                                         </div>
                                         <div>
-                                            <label for="endDate">　終了日時　:</label>
+                                            <label for="endDate">終了日時:</label>
                                             <input type="text" id="endDate" name="end_time" readonly>
                                         </div>
                                     </div>

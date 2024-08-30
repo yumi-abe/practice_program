@@ -15,7 +15,7 @@
               @endif
                 {{-- <div class="p-6 text-gray-900"> --}}
                   @if($reserveForms->isEmpty())
-                  <div class="bg-gray-200 rounded-lg text-center font-bold w-1/3 mx-auto">
+                  <div class="bg-gray-200 rounded-lg text-center font-bold w-2/3 lg:w-1/3 mx-auto">
                     <p>予約がありません</p>
                   </div>
                     @else
@@ -95,12 +95,12 @@
                     過去のご予約一覧 
                   </h3>
                   @if ($pastReserveForms->isEmpty())
-                    <div class="bg-gray-200 rounded-lg text-center font-bold w-1/3 mx-auto">
+                    <div class="bg-gray-200 rounded-lg text-center font-bold w-2/3 lg:w-1/3 mx-auto">
                       <p>過去の予約がありません</p>
                     </div>
                   @else
                   <div class="lg:w-2/3 w-full mx-auto overflow-auto text-gray-900">
-                    <table class="hidden md:flex table-auto w-full text-left whitespace-no-wrap">
+                    <table class="hidden md:block table-auto w-full text-left whitespace-no-wrap">
                       <thead>
                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300 rounded-tl rounded-bl">ID</th>
                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">名前</th>
