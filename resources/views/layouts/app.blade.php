@@ -23,12 +23,12 @@
     <body class="font-body antialiased">
         <div class="min-h-screen bg-body">
             <div>
-                @include('layouts.navigation')
+                {{-- @include('layouts.navigation') --}}
 
                 @if(auth('owners')->user())
                     @include('layouts.owner-navigation')
-                {{-- @elseif(auth('users')->user())
-                    @include('layouts.navigation') --}}
+                @elseif(auth('users')->user())
+                    @include('layouts.navigation')
                 @endif
             </div>
 

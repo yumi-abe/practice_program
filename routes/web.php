@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReserveFormController;
@@ -55,6 +56,7 @@ Route::get('/reservations/events', function () {
 
     return response()->json($events);
 });
+
 
 Route::get('/', function () {
     return view('index');
