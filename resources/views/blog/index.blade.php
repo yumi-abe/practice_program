@@ -1,20 +1,6 @@
 <x-app-layout>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
-             ご予約一覧 
-        </h2>
-    </x-slot>
-
-  @push('custom-css')
-  <link rel="stylesheet" href="{{ asset('/css/swipe.css') }}">
-  @endpush
-
-  @push('custom-js')
-  <script src="{{ asset('/js/swipe.js') }}"></script>
-  @endpush
         <h2 class="font-semibold text-xl text-brown-500 leading-tight text-center mt-10">
-             管理者用お知らせ一覧
+             ブログ管理ページ
         </h2>
 
     <div class="py-12">
@@ -49,8 +35,14 @@
                 </tbody>
               </table>
             </div>
+            {{ $blogs->links() }}
         </div>
     </div>
 
-    
+    <div class="text-center">
+      <x-primary-button>
+        <a class="text-base" href="{{ route('owner.blog.create') }}">投稿する</a>
+      </x-primary-button>
+    </div>
+
 </x-app-layout>

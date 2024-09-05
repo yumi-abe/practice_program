@@ -1,4 +1,4 @@
-<x-home-layout>
+<x-app-layout>
 
   @push('custom-css')
   <link rel="stylesheet" href="{{ asset('/css/swipe.css') }}">
@@ -18,6 +18,52 @@
                 <thead>
                   <tr>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">投稿日</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->created_at }}</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">タイトル</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->title }}</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">内容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->content }}</td> 
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">添付画像</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    @if (!empty($blog->image_path))
+                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->image_path }}</td> 
+                    @else
+                    <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">添付されていません</td> 
+                    @endif
+                  </tr>
+                </tbody>
+                
+
+                {{-- <thead>
+                  <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">投稿日</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">タイトル</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">内容</th>
                   </tr>
@@ -29,7 +75,7 @@
                       <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->content }}</td> 
                       </td>
                     </tr>
-                </tbody>
+                </tbody> --}}
               </table>
             </div>
         </div>
