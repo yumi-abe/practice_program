@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReserveFormController;
 use App\Models\ReserveForm;
@@ -56,6 +57,9 @@ Route::get('/reservations/events', function () {
 
     return response()->json($events);
 });
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
 
 Route::get('/', function () {
