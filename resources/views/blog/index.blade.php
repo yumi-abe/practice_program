@@ -26,7 +26,7 @@
                     <tr>
                       <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->created_at }}</td>
                       <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->title }}</td>
-                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $blog->content }}</td> 
+                      <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ Str::limit($blog->content, 50) }}</td> 
                       <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">
                         <x-primary-button><a class="" href="{{ route('owner.blog.show', ['id' => $blog->id]) }}">詳細を見る</a></x-primary-button>
                       </td>
@@ -37,12 +37,13 @@
             </div>
             {{ $blogs->links() }}
         </div>
+        <div class="text-center">
+          <x-primary-button>
+            <a class="text-base" href="{{ route('owner.blog.create') }}">投稿する</a>
+          </x-primary-button>
+        </div>
     </div>
 
-    <div class="text-center">
-      <x-primary-button>
-        <a class="text-base" href="{{ route('owner.blog.create') }}">投稿する</a>
-      </x-primary-button>
-    </div>
+
 
 </x-app-layout>

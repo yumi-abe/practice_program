@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
         return view('blog.index', compact('blogs'));
     }
 
@@ -31,14 +32,21 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
-        Blog::create([
+        $attibutes = [
             'title' => $request->title,
             'content' => $request->content,
             'image_path' => $request->image_path,
             'owner_id' => Auth::id(), //ログインしているユーザーID
-        ]);
+        ];
+
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('images', 'public');
+            $attibutes['image_path'] = $imagePath;
+        }
+
+        Blog::create($attibutes);
 
         session()->flash('status', '予約完了しました。');
         return to_route('owner.blog.index');

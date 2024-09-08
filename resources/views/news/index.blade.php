@@ -10,7 +10,13 @@
         <div class="p-4 md:w-1/3">
         <a href="{{ route('user.news.show', ['id' => $blog->id]) }}">
           <div class="h-full bg-white hover:bg-gray-200 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-            <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+            @empty($blog->image_path)
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="blog">
+
+            @else
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/' . $blog->image_path )}}" alt="blog">
+            @endempty
+
             <div class="p-6 flex flex-col">
               <h2 class="tracking-widest text-xl title-font font-bold text-brown-500 mb-1">{{ $blog->title }}</h2>
               <p class="leading-relaxed mb-3">{{ Str::limit($blog->content, 100) }}</p>
