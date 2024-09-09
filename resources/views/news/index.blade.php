@@ -2,6 +2,14 @@
     <h2 class="font-semibold text-xl text-brown-500 leading-tight text-center mt-10">
         お知らせ一覧
    </h2>
+      @if (Auth::guard('owners')->check())
+   <div class="text-right mr-6">
+      <x-primary-button>
+        <a class="text-base" href="{{ route('owner.blog.index') }}">管理者ページへ</a>
+      </x-primary-button>
+   </div>
+    @endif
+
 
    <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
