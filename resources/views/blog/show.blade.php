@@ -11,6 +11,12 @@
              詳細
         </h2>
 
+        <div class="text-right max-w-7xl mr-6">
+          <x-primary-button>
+            <a class="text-base" href="{{ route('user.news.show', ['id' => $blog->id]) }}">閲覧ページへ</a>
+          </x-primary-button>
+        </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">               
@@ -63,10 +69,13 @@
                 </tbody>
               </table>
             </div>
-            <div class="text-center my-10">
-              <x-primary-button>
-                <a class="text-base" href="{{ route('owner.blog.index') }}">戻る</a>
-              </x-primary-button>
+            <div class="flex flex-col items-center gap-4 my-10">
+              <form method="get" action="{{ route('owner.blog.edit', ['id' => $blog->id]) }}">
+                <button class="text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded sm:text-base font-bold">編集する</button>
+              </form>
+              <a href="{{ route('owner.blog.index') }}">
+                <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold">戻る</button>
+              </a>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
         @if (Auth::guard('owners')->check())
     <div class="text-right mt-6 mr-6">
         <x-primary-button>
-          <a class="text-base" href="{{ route('owner.blog.index') }}">編集する</a>
+          <a class="text-base" href="{{ route('owner.blog.edit', ['id' => $blog->id]) }}">編集する</a>
         </x-primary-button>
      </div>
       @endif

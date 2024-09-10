@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -72,7 +73,9 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner_id = Auth::id();
+        $blog = Blog::find($id);
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -82,9 +85,30 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreBlogRequest $request, $id)
     {
-        //
+        $blog = Blog::find($id);
+
+        $attributes = $request->all();
+        if (!$request->hasFile('image_path')) {
+            if ($blog->image_path) {
+                Storage::disk('public')->delete($blog->image_path); //古いファイルを削除
+                $attributes['image_path'] = '';
+            }
+        } else {
+            //新しい画像がアップロードされた場合
+            if ($blog->image_path) {
+                Storage::disk('public')->delete($blog->image_path); //古いファイルを削除
+            }
+            $imagePath = $request->file('image_path')->store('images', 'public'); //新しい画像を保存
+            $attributes['image_path'] = $imagePath; //新しい画像パスを保存
+        }
+
+        $blog->update($attributes);
+
+        session()->flash('status', '更新しました');
+
+        return to_route('owner.blog.index');
     }
 
     /**
