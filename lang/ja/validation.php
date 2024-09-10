@@ -201,8 +201,8 @@ return [
         'year'                     => '年',
         'plan_category'            => 'プラン',
         'cast_category'            => 'キャスト',
-        'start_time'            => '開始時間',
-        'end_time'            => '終了時間',
-
+        'start_time'               => '開始時間',
+        'end_time'                 => '終了時間',
+        'image_path'               => '添付ファイル',
     ],
 ];

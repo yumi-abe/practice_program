@@ -42,8 +42,8 @@ class Owner extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function User()
+    public function blogs()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Blog::class);
     }
 }
