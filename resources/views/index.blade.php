@@ -24,7 +24,7 @@
       <h2 class="text-2xl font-bold text-white ml- mb-7"><img class="mx-auto" src="{{ asset('img/news1x.png') }}" alt="news"></h2>
       <div class="flex sm:justify-around sm:flex-row flex-col items-center">
         @foreach ( $blogs as $blog )
-        <div>
+        <div class="text-center">
           <a href="{{ route('user.news.show', ['id' => $blog->id]) }}">
             @empty($blog->image_path)
             <img class="h-32 w-full object-cover object-center rounded-lg" src="{{ asset('storage/images/noimage.png')}}" alt="blog">
@@ -33,7 +33,7 @@
             @endempty
             <p>
               <time>{{ $blog->created_at->format('Y/m/d') }}</time>
-              <br>GWの営業時間について
+              <br>{{ $blog->title }}
             </p>
           </a>
         </div>
