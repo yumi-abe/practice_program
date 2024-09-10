@@ -62,6 +62,8 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
+
+        // dd($blog);
         return view('blog.show', compact('blog'));
     }
 
@@ -119,6 +121,13 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blog = Blog::find($id);
+
+        if ($blog->image_path) {
+            Storage::disk('public')->delete($blog->image_path); //ファイルを削除
+        }
+        $blog->delete();
+        session()->flash('status', '削除しました');
+        return to_route('owner.blog.index');
     }
 }

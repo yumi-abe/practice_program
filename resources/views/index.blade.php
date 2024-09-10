@@ -22,41 +22,29 @@
     <!-- news -->
     <section id="news" class="bg-body py-10">
       <h2 class="text-2xl font-bold text-white ml- mb-7"><img class="mx-auto" src="{{ asset('img/news1x.png') }}" alt="news"></h2>
-      <div class="flex justify-around">
+      <div class="flex sm:justify-around sm:flex-row flex-col items-center">
+        @foreach ( $blogs as $blog )
         <div>
-          <a href="#">
-            <img class="rounded-lg" src="{{ asset('img/newsitem011x.jpg') }}" alt="GWの営業時間について">
+          <a href="{{ route('user.news.show', ['id' => $blog->id]) }}">
+            @empty($blog->image_path)
+            <img class="h-32 w-full object-cover object-center rounded-lg" src="{{ asset('storage/images/noimage.png')}}" alt="blog">
+            @else
+            <img class="h-32 w-full object-cover object-center rounded-lg" src="{{ asset('storage/' . $blog->image_path )}}" alt="blog">
+            @endempty
+            <p>
+              <time>{{ $blog->created_at->format('Y/m/d') }}</time>
+              <br>GWの営業時間について
+            </p>
           </a>
-          <p>
-            <time datetime="2023-04-01">2023.4.01</time>
-            <br>GWの営業時間について
-          </p>
         </div>
-        <div>
-          <a href="#">
-            <img class="rounded-lg"  src="{{ asset('img/newsitem021x.jpg') }}" alt="新入りキャスト紹介">
-          </a>
-          <p>
-            <time datetime="2023-03-15">2023.3.15</time>
-            <br>新入りキャスト紹介
-          </p>
-        </div>
-        <div>
-          <a href="#">
-            <img class="rounded-lg"  src="{{ asset('img/newsitem031x.jpg') }}" alt="お得な月間パスのご案内">
-          </a>
-          <p>
-            <time datetime="2023-03-15">2023.2.1</time>
-            <br>お得な月間パスのご案内
-          </p>
-        </div>
+        @endforeach
       </div>
       <div class="text-center mt-6">
         {{-- <a href="#">
           <button type="button" class="text-2xl text-white bg-brown-500 rounded-lg py-3 px-5">more</button>
         </a> --}}
         <x-primary-button>
-          <a class="text-base">more</a>
+          <a class="text-base" href="{{ route('user.news.index') }}">more</a>
         </x-primary-button>
       </div>
     </section>

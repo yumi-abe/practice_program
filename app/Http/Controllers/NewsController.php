@@ -11,7 +11,7 @@ class NewsController extends Controller
     {
         // dd('Test');
         $blogs = Blog::orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(6);
         return view('news.index', compact('blogs'));
     }
 
@@ -20,5 +20,15 @@ class NewsController extends Controller
         $blog = Blog::find($id);
 
         return view('news.show', compact('blog'));
+    }
+
+    public function home()
+    {
+        $blogs = Blog::orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+        // dd($blogs);
+
+        return view('index', compact('blogs'));
     }
 }

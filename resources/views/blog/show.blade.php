@@ -70,15 +70,29 @@
               </table>
             </div>
             <div class="flex flex-col items-center gap-4 my-10">
-              <form method="get" action="{{ route('owner.blog.edit', ['id' => $blog->id]) }}">
-                <button class="text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded sm:text-base font-bold">編集する</button>
-              </form>
-              <a href="{{ route('owner.blog.index') }}">
-                <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold">戻る</button>
+              <div class="flex items-center gap-6">
+                <form method="get" action="{{ route('owner.blog.edit', ['id' => $blog->id]) }}">
+                  <button class="text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded sm:text-base font-bold">編集する</button>
+                </form>
+                <form id="delete_{{ $blog->id }}" method="post" action="{{ route('owner.blog.destroy', ['id' => $blog->id ])}}">
+                  @csrf
+                  <a href="#" data-id="{{ $blog->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-base font-bold">削除する</a>
+                </form>
+              </div>
+              <a class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold" href="{{ route('owner.blog.index') }}">
+                戻る
               </a>
             </div>
         </div>
     </div>
 
-    
+        {{-- 確認メッセージ --}}
+        <script>
+          function deletePost(e){
+              'use strict'
+              if(confirm('本当にキャンセルしてよろしいですか？')){
+                  document.getElementById('delete_' + e.dataset.id).submit()
+              }
+          }
+      </script>
 </x-home-layout>
