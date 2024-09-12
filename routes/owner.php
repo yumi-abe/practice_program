@@ -14,6 +14,7 @@ use App\Http\Controllers\Owner\Auth\PasswordController;
 use App\Http\Controllers\Owner\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Owner\Auth\RegisteredUserController;
 use App\Http\Controllers\Owner\Auth\VerifyEmailController;
+use App\Http\Controllers\ReserveListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,15 @@ Route::prefix('blog')
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/{id}', 'update')->name('update');
         Route::post('/{id}/destroy', 'destroy')->name('destroy');
+    });
+
+Route::prefix('reserve-list')
+    ->middleware('auth:owners')
+    ->name('reserve-list.')
+    ->controller(ReserveListController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/past', 'past')->name('past');
     });
 
 

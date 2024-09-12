@@ -71,7 +71,7 @@
                           <tbody>
                               <tr>
                                   <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">予約日時</th>
-                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{$reserveForm->formated_Date}}<br>{{ $reserveForm->formated_startTime }}～{{ $reserveForm->formated_endDate }}</td>
+                                  <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{$reserveForm->formated_date}}<br>{{ $reserveForm->formated_startTime }}～{{ $reserveForm->formated_endDate }}</td>
                               </tr>
                               <tr>
                                   <th class="px-4 py-3 border-t-2 border-body border-b-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">プラン</th>

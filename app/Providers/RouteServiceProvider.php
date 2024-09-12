@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/booking';
-    public const OWNER_HOME = '/owner/blog';
+    public const OWNER_HOME = '/owner/reserve-list';
 
 
     /**
@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::prefix('/')
-                ->as('user.') //いるか確認
+                ->as('user.')
                 ->middleware('web')
                 ->group(base_path('routes/web.php'));
 

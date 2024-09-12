@@ -6,12 +6,35 @@
     {{-- マイページタブ --}}
     <!-- Navigation Links -->
     <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
-        <x-nav-link :href="route('owner.dashboard')" :active="request()->routeIs('owner.dashboard')">
+        <x-dropdown align="right" width="48">
+            <x-slot name="trigger">
+                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white  hover:bg-white hover:text-gray-600 focus:outline-none transition ease-in-out duration-150">
+                    <div>予約管理</div>
+
+                    <div class="ml-1">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </button>
+            </x-slot>
+
+            <x-slot name="content">
+                <x-dropdown-link :href="route('owner.reserve-list.index')">
+                    現在の予約一覧
+                </x-dropdown-link>
+                <x-dropdown-link :href="route('owner.reserve-list.past')">
+                    過去の予約一覧
+                </x-dropdown-link>
+            </x-slot>
+        </x-dropdown>
+        {{-- <x-nav-link :href="route('owner.reserve-list.index')" :active="request()->routeIs('owner.reserve-list.index')">
             {{ __('予約一覧') }}
-        </x-nav-link>
-        <x-nav-link :href="route('owner.blog.index')" :active="request()->routeIs('forms.index')">
+        </x-nav-link> --}}
+        <x-nav-link :href="route('owner.blog.index')" :active="request()->routeIs('owner.blog.index')">
             {{ __('ブログ一覧') }}
         </x-nav-link>
+        
     </div>
     
     <!-- Settings Dropdown -->
