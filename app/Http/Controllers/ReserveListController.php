@@ -17,9 +17,6 @@ class ReserveListController extends Controller
             ->whereDate('start_date', '>', $today)
             ->paginate(5);
         FormService::formatDate($reserveForms);
-        // dd($reserveForms);
-
-
 
         return view('reserve-list.index', compact('reserveForms'));
     }
@@ -34,5 +31,15 @@ class ReserveListController extends Controller
         FormService::formatDate($pastReserveForms);
 
         return view('reserve-list.past', compact('pastReserveForms'));
+    }
+
+    public function show($id)
+    {
+        $reserve = ReserveForm::find($id);
+        $reserve->formated_date = Carbon::parse($reserve->start_date)->format('Y年m月d日');
+        $reserve->formated_startTime = Carbon::parse($reserve->start_date)->format('H:i');
+        $reserve->formated_endDate = Carbon::parse($reserve->end_date)->format('H:i');
+
+        return view('reserve-list.show', compact('reserve'));
     }
 }

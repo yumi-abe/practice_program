@@ -82,6 +82,7 @@ Route::prefix('reserve-list')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/past', 'past')->name('past');
+        Route::get('/{id}', 'show')->name('show');
     });
 
 

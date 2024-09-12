@@ -1,4 +1,8 @@
 <x-app-layout>
+    @push('custom-js')
+        <script src="{{ asset('/js/confirm-message.js') }}"></script>
+    @endpush
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
             詳細画面
@@ -9,8 +13,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <section class="text-gray-600 body-font relative">
-                         
-                    {{-- 問い合わせフォーム --}}
                             <div class="container px-5 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                                 <div class="flex flex-wrap -m-2">
@@ -30,7 +32,6 @@
                                     <div>
                                         <label for="plan_category" class="leading-7 text-sm text-gray-600">プラン選択</label>
                                     </div>
-                                    {{-- データベースより値を持ってくる --}}
                                     <div class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="">
                                         {{ $plansId }}
                                     </div>
@@ -87,13 +88,4 @@
             </div>
         </div>
     </div>
-    {{-- 確認メッセージ --}}
-    <script>
-        function deletePost(e){
-            'use strict'
-            if(confirm('本当にキャンセルしてよろしいですか？')){
-                document.getElementById('delete_' + e.dataset.id).submit()
-            }
-        }
-    </script>
 </x-app-layout>
