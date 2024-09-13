@@ -114,9 +114,9 @@
                                 </div>
                                 <div class="p-2 w-full mt-4 flex flex-col items-center gap-2 sm:flex sm:flex-row sm:justify-evenly">
                                     <a href="{{ route('user.booking.show', [$reserve->id]) }}">
-                                        <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-12 sm:px-14 focus:outline-none hover:bg-gray-600 rounded text-lg">戻る</button>
+                                        <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-12 sm:px-14 focus:outline-none hover:bg-gray-600 rounded text-lg font-bold">戻る</button>
                                     </a>
-                                    <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">更新する</button>
+                                    <button type="submit" class="  text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded text-lg font-bold">更新する</button>
                                 </div>
                                 {{-- <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                                     <a class="text-indigo-500">example@email.com</a>
