@@ -16,7 +16,7 @@ class FormService
 
 
         foreach ($reserveForms as $reserveForm) {
-            $reserveForm->formated_Date = Carbon::parse($reserveForm->start_date)->format('Y年m月d日');
+            $reserveForm->formated_date = Carbon::parse($reserveForm->start_date)->format('Y年m月d日');
             $reserveForm->formated_startDate = Carbon::parse($reserveForm->start_date)->format('Y年m月d日 H:i');
             $reserveForm->formated_startTime = Carbon::parse($reserveForm->start_date)->format('H:i');
             $reserveForm->formated_endDate = Carbon::parse($reserveForm->end_date)->format('H:i');
@@ -57,6 +57,7 @@ class FormService
         try {
             //重複する予約がないかチェック
             $events = DB::table('reserve_forms')
+                ->whereNull('deleted_at') //ソフトデリートした予約を除く
                 ->where(function ($query) use ($request) {
                     $query->where('cast_category_id', '=', $request->cast_category)
                         ->where('start_date', '<', $request->end_time)

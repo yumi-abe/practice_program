@@ -103,13 +103,14 @@
                                 </div>
                                 <div class="p-2 w-full mt-4 text-center flex flex-col gap-4 sm:justify-evenly">
                                     <div>
-                                        <a href="{{ route('user.booking.index') }}">
-                                            <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 rounded sm:text-lg">戻る</button>
-                                        </a>
+                                        <button type="submit" class="  text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 font-bold rounded sm:text-lg">新規登録する</button>
                                     </div>
                                     <div>
-                                        <button type="submit" class="  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded sm:text-lg">新規登録する</button>
+                                        <a href="{{ route('user.booking.index') }}">
+                                            <button type="button" class="  text-white bg-gray-400 border-0 py-2 px-8 focus:outline-none hover:bg-gray-600 font-bold rounded sm:text-lg">戻る</button>
+                                        </a>
                                     </div>
+
                                 </div>
                                 
                             </div>

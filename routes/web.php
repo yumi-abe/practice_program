@@ -45,11 +45,11 @@ Route::prefix('booking') // 頭に forms をつける
         Route::get('/', 'index')->name('index'); // 名前つきルート
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
+        Route::get('/past', 'past')->name('past');
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}', 'update')->name('update');
-        Route::post('/{id}/destroy', 'destroy')->name('destroy');
-        Route::get('/past', 'past')->name('past');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
 Route::get('/reservations/events', function () {

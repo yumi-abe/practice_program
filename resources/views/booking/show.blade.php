@@ -1,4 +1,8 @@
 <x-app-layout>
+    @push('custom-js')
+        <script src="{{ asset('/js/confirm-message.js') }}"></script>
+    @endpush
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
             詳細画面
@@ -9,8 +13,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <section class="text-gray-600 body-font relative">
-                         
-                    {{-- 問い合わせフォーム --}}
                             <div class="container px-5 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                                 <div class="flex flex-wrap -m-2">
@@ -30,7 +32,6 @@
                                     <div>
                                         <label for="plan_category" class="leading-7 text-sm text-gray-600">プラン選択</label>
                                     </div>
-                                    {{-- データベースより値を持ってくる --}}
                                     <div class="w-full rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" value="">
                                         {{ $plansId }}
                                     </div>
@@ -66,13 +67,15 @@
                                             @endif
                                     </div>
                                     @if($date >= $today)
-                                    <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
-                                        @csrf
+
                                     @if ($previousDay === $today)
                                     <div class="p-2 w-full mt-4 flex justify-evenly text-red-400">
                                         キャンセル期限を過ぎています。<br>お電話にてお問い合わせください。
                                     </div>
                                     @else
+                                    <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
+                                        @csrf
+                                        @method('delete')
                                     <div class="p-2 w-full mt-4 flex justify-evenly">
                                         <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">キャンセルする</a>
                                     </div>
@@ -87,13 +90,4 @@
             </div>
         </div>
     </div>
-    {{-- 確認メッセージ --}}
-    <script>
-        function deletePost(e){
-            'use strict'
-            if(confirm('本当にキャンセルしてよろしいですか？')){
-                document.getElementById('delete_' + e.dataset.id).submit()
-            }
-        }
-    </script>
 </x-app-layout>
