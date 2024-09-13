@@ -156,10 +156,12 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        $reserve = FormService::CheckAccess($id);
+        // $reserve = FormService::CheckAccess($id);
 
-        $reserve->delete();
+        // $reserve->delete();
+        ReserveForm::findOrFail($id)->delete(); //ソフトデリート
 
+        session()->flash('status', 'キャンセルが完了しました');
         return to_route('user.booking.index');
     }
 

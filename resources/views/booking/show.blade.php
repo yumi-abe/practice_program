@@ -67,13 +67,15 @@
                                             @endif
                                     </div>
                                     @if($date >= $today)
-                                    <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
-                                        @csrf
+
                                     @if ($previousDay === $today)
                                     <div class="p-2 w-full mt-4 flex justify-evenly text-red-400">
                                         キャンセル期限を過ぎています。<br>お電話にてお問い合わせください。
                                     </div>
                                     @else
+                                    <form id="delete_{{ $reserve->id }}" class="mt-4" method="post" action="{{ route('user.booking.destroy', ['id' => $reserve->id ])}}">
+                                        @csrf
+                                        @method('delete')
                                     <div class="p-2 w-full mt-4 flex justify-evenly">
                                         <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="flex mx-auto text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">キャンセルする</a>
                                     </div>
