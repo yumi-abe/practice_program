@@ -41,8 +41,7 @@
                           <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $pastReserveForm->user->phone }}</td> 
     
                           <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">
-                            <x-primary-button><a class="" >詳細を見る</a></x-primary-button>
-                            {{-- <x-primary-button><a class="" href="{{ route('owner.reserve-list.show', ['id' => $pastReserveForm->id]) }}">詳細を見る</a></x-primary-button> --}}
+                            <x-primary-button><a class="" href="{{ route('owner.reserve-list.show', ['id' => $pastReserveForm->id]) }}">詳細を見る</a></x-primary-button>
                           </td>
                         </tr>
                         @endforeach

@@ -33,14 +33,28 @@ class ReserveListController extends Controller
         return view('reserve-list.past', compact('pastReserveForms'));
     }
 
+    public function cancel()
+    {
+
+        $cancelReservations = ReserveForm::onlyTrashed()
+            ->paginate(5);
+        FormService::formatDate($cancelReservations);
+
+        return view('reserve-list.cancel', compact('cancelReservations'));
+    }
+
+
     public function show($id)
     {
-        $reserve = ReserveForm::find($id);
+        $reserve = ReserveForm::withTrashed()->find($id);
         $reserve->formated_date = Carbon::parse($reserve->start_date)->format('Y年m月d日');
         $reserve->formated_startTime = Carbon::parse($reserve->start_date)->format('H:i');
         $reserve->formated_endDate = Carbon::parse($reserve->end_date)->format('H:i');
 
-        return view('reserve-list.show', compact('reserve'));
+        $today = Carbon::today()->format('Y年m月d日');
+        $date = Carbon::parse($reserve->editEventDate)->format('Y年m月d日');
+
+        return view('reserve-list.show', compact('reserve', 'today', 'date'));
     }
 
     public function destroy($id)

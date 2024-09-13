@@ -26,6 +26,9 @@
                 <x-dropdown-link :href="route('owner.reserve-list.past')">
                     過去の予約一覧
                 </x-dropdown-link>
+                <x-dropdown-link :href="route('owner.reserve-list.cancel')">
+                    キャンセル予約一覧
+                </x-dropdown-link>
             </x-slot>
         </x-dropdown>
         {{-- <x-nav-link :href="route('owner.reserve-list.index')" :active="request()->routeIs('owner.reserve-list.index')">
