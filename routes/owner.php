@@ -83,6 +83,7 @@ Route::prefix('reserve-list')
         Route::get('/', 'index')->name('index');
         Route::get('/past', 'past')->name('past');
         Route::get('/{id}', 'show')->name('show');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
 

@@ -42,4 +42,12 @@ class ReserveListController extends Controller
 
         return view('reserve-list.show', compact('reserve'));
     }
+
+    public function destroy($id)
+    {
+        ReserveForm::findOrFail($id)->delete(); //ソフトデリート
+
+        session()->flash('status', 'キャンセルが完了しました');
+        return to_route('owner.reserve-list.index');
+    }
 }

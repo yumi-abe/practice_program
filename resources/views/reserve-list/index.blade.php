@@ -6,6 +6,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden sm:rounded-lg">
+              @if (session('status'))
+                <div class="mb-4 font-bold text-sm text-brown-400 bg-white text-center rounded-lg mx-auto w-2/3 lg:w-1/3">
+                    {{ session('status') }}
+                </div>
+              @endif
                 @if($reserveForms->isEmpty())
                 <div class="bg-gray-200 rounded-lg text-center font-bold w-2/3 lg:w-1/3 mx-auto">
                     予約は存在しません

@@ -2,7 +2,7 @@
     @push('custom-js')
         <script src="{{ asset('/js/confirm-message.js') }}"></script>
     @endpush
-    
+
     <h2 class="font-semibold text-xl text-brown-500 leading-tight text-center mt-10">
         予約詳細ページ
    </h2>
@@ -88,10 +88,11 @@
             {{-- <form method="get" action="{{ route('owner.blog.edit', ['id' => $blog->id]) }}">
               <button class="text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded sm:text-base font-bold">編集する</button>
             </form> --}}
-            {{-- <form id="delete_{{ $reserve->id }}" method="post" action="{{ route('owner.reserve-list.destroy', ['id' => $reserve->id ])}}">
+            <form id="delete_{{ $reserve->id }}" method="post" action="{{ route('owner.reserve-list.destroy', ['id' => $reserve->id ])}}">
               @csrf
-              <a href="#" data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-base font-bold">キャンセルする</a>
-            </form> --}}
+              @method('delete')
+              <a data-id="{{ $reserve->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-base font-bold">キャンセルする</a>
+            </form>
           </div>
           <a class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold" href="{{ route('owner.reserve-list.index') }}">
             戻る

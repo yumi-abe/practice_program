@@ -24,10 +24,10 @@ return new class extends Migration
             $table->dateTime('end_date');
             $table->text('message')->nullable();
             $table->timestamps();
+            $table->softDeletes(); //ソフトデリート
 
             $table->foreign('plan_category_id')->references('id')->on('plan_categories')->constrained();
             $table->foreign('cast_category_id')->references('id')->on('cast_categories')->constrained();
-
         });
     }
 
