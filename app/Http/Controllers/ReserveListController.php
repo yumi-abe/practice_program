@@ -37,6 +37,7 @@ class ReserveListController extends Controller
     {
 
         $cancelReservations = ReserveForm::onlyTrashed()
+            ->orderBy('start_date', 'desc')
             ->paginate(5);
         FormService::formatDate($cancelReservations);
 

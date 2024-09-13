@@ -2,6 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="w-3/4 lg:w-2/5  mx-auto my-10">
+        <p class="my-2 text-center">管理者ページログイン</p>
         <form method="POST" action="{{ route('owner.login') }}">
             @csrf
 
