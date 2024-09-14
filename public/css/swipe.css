@@ -1,0 +1,32 @@
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slider-buttons {
+    margin: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.next-slide,
+.prev-slide {
+    background-color: white;
+    color: rgb(131, 131, 131);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}

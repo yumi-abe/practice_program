@@ -21,32 +21,35 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id' => '1',
-                'name' => 'test',
-                'email' => 'test@test.com',
+                'name' => 'test1',
+                'phone' => '08012345678',
+                'email' => 'test1@test.com',
                 'password' => Hash::make('password123'),
             ],
             [
                 'id' => '2',
                 'name' => 'test2',
+                'phone' => '09012345678',
                 'email' => 'test2@test.com',
                 'password' => Hash::make('password123'),
             ],
             [
                 'id' => '3',
                 'name' => 'test3',
+                'phone' => '09087654321',
                 'email' => 'test3@test.com',
                 'password' => Hash::make('password123'),
             ],
             [
                 'id' => '4',
                 'name' => 'test4',
+                'phone' => '08087654321',
                 'email' => 'test4@test.com',
                 'password' => Hash::make('password123'),
             ],
-            
+
 
         ]);
-
     }
 }
 // $table->string('email')->unique();

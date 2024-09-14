@@ -1,4 +1,4 @@
-<x-test-layout>
+<x-home-layout>
     <div class="w-3/4 lg:w-2/5  mx-auto my-10">
         <form method="POST" action="{{ route('user.register') }}" class="flex flex-col">
             @csrf
@@ -14,6 +14,13 @@
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+
+            <!-- Phone -->
+            <div class="mt-4">
+                <x-input-label for="phone" :value="__('電話番号')" />
+                <x-text-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required  />
+                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
             </div>
 
             <!-- Password -->
@@ -50,4 +57,4 @@
             </div>
         </form>
     </div>
-</x-test-layout>
+</x-home-layout>

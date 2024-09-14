@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Casts\Attribute; //アクセサ
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class ReserveForm extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -35,7 +36,7 @@ class ReserveForm extends Model
     //     return $this->date ? $this->date->format('Y-m-d H:i') : null;
     // }
 
-    
+
     public function planCategory()
     {
         return $this->belongsTo(PlanCategory::class);

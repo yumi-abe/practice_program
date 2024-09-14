@@ -8,7 +8,7 @@
             <li><a href="#cast" class="hover:text-body transition-all duration-300">cast</a></li>
             <li><a href="#price" class="hover:text-body transition-all duration-300">price</a></li>
             <li><a href="#access" class="hover:text-body transition-all duration-300">access</a></li>
-            <li><a href="{{ url('/welcome') }}">
+            <li><a href="{{ url('/login') }}">
               <button class="px-6 py-2 ml-4 bg-body rounded-lg hover:bg-pastel-pink hover:text-gray-600 transition-all duration-300">reserve</button>
             </a></li>
           </ul>
@@ -27,7 +27,7 @@
               <li><a href="#cast" class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">cast</a></li>
               <li><a href="price" class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">price</a></li>
               <li><a href="#access" class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">access</a></li>
-              <li><a href="{{ url('/welcome') }}"  class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">reserve</a></li>
+              <li><a href="{{ url('/login') }}"  class="block py-2 px-4 text-lg w-full text-center hover:bg-gray-200 transition-all duration-500">reserve</a></li>
             </ul>
           </nav>
       </header>
