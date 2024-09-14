@@ -48,7 +48,7 @@ Route::prefix('booking') // 頭に forms をつける
         Route::get('/past', 'past')->name('past');
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::post('/{id}', 'update')->name('update');
+        Route::patch('/{id}', 'update')->name('update');
         Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
