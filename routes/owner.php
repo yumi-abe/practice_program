@@ -14,7 +14,9 @@ use App\Http\Controllers\Owner\Auth\PasswordController;
 use App\Http\Controllers\Owner\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Owner\Auth\RegisteredUserController;
 use App\Http\Controllers\Owner\Auth\VerifyEmailController;
+use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\ReserveListController;
+use App\Models\Owner;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,4 +138,11 @@ Route::middleware('auth:owners')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+
+Route::middleware('auth:owners')->group(function () {
+    Route::get('/profile', [OwnerProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [OwnerProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [OwnerProfileController::class, 'destroy'])->name('profile.destroy');
 });
