@@ -73,7 +73,7 @@ Route::prefix('blog')
         Route::post('/', 'store')->name('store');
         Route::get('/{id}', 'show')->name('show');
         Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::post('/{id}', 'update')->name('update');
+        Route::patch('/{id}', 'update')->name('update');
         Route::post('/{id}/destroy', 'destroy')->name('destroy');
     });
 

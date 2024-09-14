@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blog;
+use App\Services\BlogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,17 +36,7 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
-        $attibutes = [
-            'title' => $request->title,
-            'content' => $request->content,
-            'image_path' => $request->image_path,
-            'owner_id' => Auth::id(), //ログインしているユーザーID
-        ];
-
-        if ($request->hasFile('image_path')) {
-            $imagePath = $request->file('image_path')->store('images', 'public');
-            $attibutes['image_path'] = $imagePath;
-        }
+        $attibutes = BlogService::blogStore($request);
 
         Blog::create($attibutes);
 
@@ -91,20 +82,7 @@ class BlogController extends Controller
     {
         $blog = Blog::find($id);
 
-        $attributes = $request->all();
-        if (!$request->hasFile('image_path')) {
-            if ($blog->image_path) {
-                Storage::disk('public')->delete($blog->image_path); //古いファイルを削除
-                $attributes['image_path'] = '';
-            }
-        } else {
-            //新しい画像がアップロードされた場合
-            if ($blog->image_path) {
-                Storage::disk('public')->delete($blog->image_path); //古いファイルを削除
-            }
-            $imagePath = $request->file('image_path')->store('images', 'public'); //新しい画像を保存
-            $attributes['image_path'] = $imagePath; //新しい画像パスを保存
-        }
+        $attributes = BlogService::blogUpdate($blog, $request);
 
         $blog->update($attributes);
 

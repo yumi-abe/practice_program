@@ -10,6 +10,7 @@
 
         <form method="post" action="{{ route('owner.blog.update',['id' => $blog->id]) }}" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="mb-4 text-center">
                 <label class="block text-gray-700 text-sm font-bold my-4" for="title">タイトル</label>
                 <input class="shadow appearance-none border rounded w-4/5 py-2 px-3 leading-tight" id="title" type="text" name="title" value="{{ $blog->title }}">

@@ -23,7 +23,6 @@
                 <div class="p-6 text-gray-900">
                     <x-input-error class="mb-4 text-center" :messages="$errors->all()"/>
                     <section class="text-gray-600 body-font relative">
-                    {{-- 問い合わせフォーム --}}
                     @if (session('error'))
                     <div class="mb-4 font-medium text-sm text-red-600 text-center">
                         {{ session('error') }}
@@ -31,6 +30,7 @@
                     @endif
                         <form method="post" action="{{ route('user.booking.update', ['id' => $reserve->id]) }}">
                             @csrf
+                            @method('PATCH')
                             <div class="container px-5 mx-auto">
                                 <div class="lg:w-2/3 md:w-3/4 mx-auto">
                                 <div class="flex flex-wrap -m-2">
@@ -72,7 +72,7 @@
                                         <option value="">選択してください</option>
                                         <option value="1" @if($reserve->cast_category_id == 1) selected @endif>あんこ</option>
                                         <option value="2" @if($reserve->cast_category_id == 2) selected @endif>おもち</option>
-                                        <option value="3" @if($reserve->cast_category_id == 3) selected @endif>フリータイム</option>
+                                        <option value="3" @if($reserve->cast_category_id == 3) selected @endif>きなこ</option>
                                         {{-- @foreach ($casts as $id => $name)
                                             <option value='{{ $id }}'>{{ $name }}</option>
                                         @endforeach --}}
