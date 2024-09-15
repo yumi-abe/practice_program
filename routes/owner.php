@@ -74,7 +74,7 @@ Route::prefix('blog')
         Route::get('/{id}', 'show')->name('show');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::patch('/{id}', 'update')->name('update');
-        Route::post('/{id}/destroy', 'destroy')->name('destroy');
+        Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
 Route::prefix('reserve-list')

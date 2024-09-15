@@ -76,6 +76,7 @@
                 </form>
                 <form id="delete_{{ $blog->id }}" method="post" action="{{ route('owner.blog.destroy', ['id' => $blog->id ])}}">
                   @csrf
+                  @method('DELETE')
                   <a href="#" data-id="{{ $blog->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-base font-bold">削除する</a>
                 </form>
               </div>
