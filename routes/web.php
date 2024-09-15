@@ -19,25 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::resource('forms', ReserveFormController::class);
-// Route::get('forms', [ReserveFormController::class, 'index'])->name('forms.index');
-
-// Route::prefix('forms') // 頭に forms をつける
-//  ->middleware(['auth']) // 認証
-//  ->name('forms.') // ルート名
-//  ->controller(ReserveFormController::class) // コントローラ指定(laravel9から)
-//  ->group(function(){ // グループ化
-//  Route::get('/', 'index')->name('index'); // 名前つきルート
-//  Route::get('/create', 'create')->name('create'); 
-//  Route::post('/', 'store')->name('store');
-//  Route::get('/{id}', 'show')->name('show');
-//  Route::get('/{id}/edit', 'edit')->name('edit');
-//  Route::post('/{id}', 'update')->name('update');
-//  Route::post('/{id}/destroy', 'destroy')->name('destroy');
-
-// });
-
-Route::prefix('booking') // 頭に forms をつける
+Route::prefix('booking') // 頭に booking をつける
     ->middleware(['auth']) // 認証
     ->name('booking.') // ルート名
     ->controller(BookingController::class) // コントローラ指定(laravel9から)
@@ -80,3 +62,22 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+
+// Route::resource('forms', ReserveFormController::class);
+// Route::get('forms', [ReserveFormController::class, 'index'])->name('forms.index');
+
+// Route::prefix('forms') // 頭に forms をつける
+//  ->middleware(['auth']) // 認証
+//  ->name('forms.') // ルート名
+//  ->controller(ReserveFormController::class) // コントローラ指定(laravel9から)
+//  ->group(function(){ // グループ化
+//  Route::get('/', 'index')->name('index'); // 名前つきルート
+//  Route::get('/create', 'create')->name('create'); 
+//  Route::post('/', 'store')->name('store');
+//  Route::get('/{id}', 'show')->name('show');
+//  Route::get('/{id}/edit', 'edit')->name('edit');
+//  Route::post('/{id}', 'update')->name('update');
+//  Route::post('/{id}/destroy', 'destroy')->name('destroy');
+
+// });
