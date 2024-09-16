@@ -53,13 +53,13 @@
                                     </div>
                                     {{-- データベースより値を持ってくる --}}
                                     <select name="plan_category" id="planCategory">
-                                        <option value="">選択してください</option>
+                                        {{-- <option value="">選択してください</option>
                                         <option value="1" @if($reserve->plan_category_id == 1) selected @endif>30分コース</option>
                                         <option value="2" @if($reserve->plan_category_id == 2) selected @endif>60分コース</option>
-                                        <option value="3" @if($reserve->plan_category_id == 3) selected @endif>フリータイム</option>
-                                        {{-- @foreach ($plans as $id => $name)
-                                            <option value='{{ $id }}'>{{ $name }}</option>
-                                        @endforeach --}}
+                                        <option value="3" @if($reserve->plan_category_id == 3) selected @endif>フリータイム</option> --}}
+                                        @foreach ($plans as $plan)
+                                            <option value='{{ $plan->id }}' @if($reserve->plan_category_id == $plan->id) selected @endif>{{ $plan->plan_name }}</option>
+                                        @endforeach
                                     </select>
                                     </div>
                                 </div>
@@ -69,13 +69,13 @@
                                         <label for="cast_category" class="leading-7 text-lg text-gray-600">キャスト選択</label>
                                     </div>
                                     <select name="cast_category" id="castCategory">
-                                        <option value="">選択してください</option>
+                                        {{-- <option value="">選択してください</option>
                                         <option value="1" @if($reserve->cast_category_id == 1) selected @endif>あんこ</option>
                                         <option value="2" @if($reserve->cast_category_id == 2) selected @endif>おもち</option>
-                                        <option value="3" @if($reserve->cast_category_id == 3) selected @endif>きなこ</option>
-                                        {{-- @foreach ($casts as $id => $name)
-                                            <option value='{{ $id }}'>{{ $name }}</option>
-                                        @endforeach --}}
+                                        <option value="3" @if($reserve->cast_category_id == 3) selected @endif>きなこ</option> --}}
+                                    @foreach ($casts as $cast)
+                                        <option value='{{ $cast->id }}' @if($reserve->cast_category_id == $cast->id) selected @endif>{{ $cast->cast_name }}</option>
+                                    @endforeach
                                     </select>
                                     </div>
                                 </div>
