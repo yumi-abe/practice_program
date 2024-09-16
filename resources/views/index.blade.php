@@ -48,6 +48,10 @@
         </x-primary-button>
       </div>
     </section>
+    <section id="cast" class="bg-pastel-pink py-10">
+      <x-cast-intoroduction />
+
+    </section>
     
 
     {{-- </main> --}}
