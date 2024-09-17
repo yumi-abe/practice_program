@@ -1,4 +1,5 @@
     <x-home-layout>
+
     <!-- メインビジュアル -->
     <div>
       <img

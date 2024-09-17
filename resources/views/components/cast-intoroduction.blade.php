@@ -1,4 +1,12 @@
 
+@push('custom-css')
+<link rel="stylesheet" href="{{ asset('/css/modal.css') }}">
+@endpush
+
+@push('custom-js')
+<script src="{{ asset('/js/modal.js') }}"></script>
+@endpush
+
 <div class="text-center">
     <h2 class="text-2xl font-bold text-brown-500 ml- mb-7">CAST</h2>
     <p>画像をクリックすると詳細が見れます</p>
@@ -6,7 +14,7 @@
 <div class="sm:grid sm:grid-cols-3">
     <!-- キャスト紹介部分（ループ予定 -->
     <div class="my-10 flex flex-col items-center">
-        <div class="cursor-pointer" onclick="openModal('modal1')">
+        <div class="cursor-pointer" onclick="openModal('modal1')"> <!-- 修正箇所 -->
             <img src="{{asset('img/cast11x.png')}}" alt="cat">
         </div>
         <div class="cursor-pointer">
@@ -39,7 +47,8 @@
     </div>
 
     <!-- モーダル -->
-    <div id="modal1" class="modal z-10 w-full h-full fixed left-0 top-0  justify-center items-center hidden"  style="background-color: rgba(128, 128, 128, 0.5);">
+        <!-- 修正箇所 -->
+    <div id="modal1" class="modal z-10 w-full h-full fixed left-0 top-0  justify-center items-center hidden modal-hidden modal-transition"  style="background-color: rgba(128, 128, 128, 0.5);">
         <div class="z-20 bg-body p-10 max-w-lg flex flex-col rounded-lg m-auto relative top-20 sm:top-10">
             <div class="text-right text-4xl mb-2">
                 <span class="cursor-pointer" onclick="closeModal('modal1')">
@@ -96,25 +105,4 @@
         </div>
     </div>
 </div>
-<script>
 
-function openModal(modalId) {
-    document.getElementById(modalId).classList.remove('hidden');
-    // document.getElementById(modalId).classList.remove('flex');
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.add('hidden');
-}
-
- // モーダル外クリックで閉じる
-window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].classList.add('hidden');
-                }
-            }
-        }
-
-</script>
