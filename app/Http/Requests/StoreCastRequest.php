@@ -29,8 +29,10 @@ class StoreCastRequest extends FormRequest
             'types' => ['required', 'string', 'max:255'],
             'age' => ['between:1,20'],
             'character' => ['required', 'string', 'max:255'],
-            'main_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'sub_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'main_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'sub_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'main_image_path' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'sub_image_path' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ];
     }
 }

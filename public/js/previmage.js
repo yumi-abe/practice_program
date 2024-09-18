@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const imageInputs = document.querySelectorAll('.image-input');  // 全ての画像入力フィールドを取得
-    console.log(imageInputs);
     imageInputs.forEach(function(imageInput) {
         const imagePreview = imageInput.closest('div').querySelector('.image-preview');
         const removeImage = imageInput.closest('div').querySelector('.remove-image');
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 削除の意図をサーバーに伝えるためにhiddenフィールドを使う
             const removeImageField = document.createElement('input');
             removeImageField.type = 'hidden';
-            removeImageField.name = 'remove_image';  // フィールド名を個別に設定
+            removeImageField.name = imageInput.name + '_remove';  // フィールド名を個別に設定
             removeImageField.value = '1';
             imageInput.closest('div').appendChild(removeImageField);
         });

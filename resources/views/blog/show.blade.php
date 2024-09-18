@@ -1,12 +1,12 @@
 <x-app-layout>
 
-  @push('custom-css')
+  {{-- @push('custom-css')
   <link rel="stylesheet" href="{{ asset('/css/swipe.css') }}">
   @endpush
 
   @push('custom-js')
   <script src="{{ asset('/js/swipe.js') }}"></script>
-  @endpush
+  @endpush --}}
         <h2 class="font-semibold text-xl text-brown-500 leading-tight text-center mt-10">
              詳細
         </h2>
