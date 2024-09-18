@@ -21,6 +21,7 @@
                     <tr>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">ID</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">名前</th>
+                      <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">種類</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">性別</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">年齢</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">性格</th>
@@ -34,6 +35,7 @@
                       <tr>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->id }}</td>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->cast_name }}</td>
+                        <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->types }}</td>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">
                             @if ($cast->gender === 1)
                                 ♂
@@ -71,7 +73,7 @@
         </div>
         <div class="text-center my-10">
           <x-primary-button>
-            <a class="text-base" href="{{ route('owner.blog.create') }}">登録する</a>
+            <a class="text-base" href="{{ route('owner.cast-list.create') }}">登録する</a>
           </x-primary-button>
         </div>
     </div>

@@ -21,16 +21,16 @@
             </div>
             <div class="mb-4 text-center">
                 <label class="block text-gray-700 text-sm font-bold my-2 mb-2" for="imagePath">添付ファイル</label>
-                <input type="file" name="image_path" id="imagePath" accept="image/*" class="hidden">
+                <input type="file" name="image_path" id="imagePath" accept="image/*" class="image-input hidden">
                 <label for="imagePath" class="inline-block cursor-pointer bg-body  text-black py-2 px-4 rounded">
                     ファイルを選択
                 </label>
 
                 
                 <div id="comment" class="flex mt-4 justify-center items-center gap-2">
-                    <img id="prevImage" class=" max-w-52 {{ $blog->image_path ? '' : 'hidden' }}"
+                    <img id="prevImage" class="image-preview max-w-52 {{ $blog->image_path ? '' : 'hidden' }}"
                     src="{{ $blog->image_path ? asset('storage/' . $blog->image_path) : '' }}" alt="previewImage">
-                    <button type="button" id="removeImage" class="mt-2 px-2 rounded border border-black {{ $blog->image_path ? '' : 'hidden' }}">削除</button>
+                    <button type="button" id="removeImage" class="remove-image mt-2 px-2 rounded border border-black {{ $blog->image_path ? '' : 'hidden' }}">削除</button>
                 </div>
             </div>
             <div class="mb-4 flex flex-col items-center gap-4">

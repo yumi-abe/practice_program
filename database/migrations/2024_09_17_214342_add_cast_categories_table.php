@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('cast_categories', function (Blueprint $table) {
             $table->bigInteger('gender');
+            $table->string('types');
             $table->integer('age');
             $table->string('character');
             $table->string('main_image_path');
