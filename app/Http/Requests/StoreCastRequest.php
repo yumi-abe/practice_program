@@ -27,7 +27,7 @@ class StoreCastRequest extends FormRequest
             'cast_name' => ['required', 'string', 'max:255'],
             'gender' => ['required'],
             'types' => ['required', 'string', 'max:255'],
-            'age' => ['between:1,20'],
+            'age' => ['required', 'integer', 'between:1,20'],
             'character' => ['required', 'string', 'max:255'],
             // 'main_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             // 'sub_image_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],

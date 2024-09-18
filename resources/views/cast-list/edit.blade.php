@@ -6,17 +6,7 @@
 <div class="py-12">
         <h2 class="text-brown-500 font-bold text-center text:xl mb-4">新規キャスト登録</h2>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-4/5 mx-auto">
-        {{-- <x-input-error class="my-4 text-center" :messages="$errors->all()"/> --}}
-            @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
+        <x-input-error class="my-4 text-center" :messages="$errors->all()"/>
         <form method="post" action="{{ route('owner.cast-list.update', ['id' => $cast->id]) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
