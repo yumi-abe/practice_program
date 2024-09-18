@@ -15,11 +15,22 @@
     @foreach ($castProfile as $cast)
     <!-- キャスト紹介部分 -->
     <div class="my-10 flex flex-col items-center">
-        <div class="cursor-pointer" onclick="openModal('modal{{ $cast->id }}')"> <!-- 修正箇所 -->
-            <img src="{{asset('img/cast11x.png')}}" alt="cat">
+        <div class="cursor-pointer" onclick="openModal('modal{{ $cast->id }}')">
+            @empty($cast->main_image_path)
+            <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
+            @else
+            <img src="{{ asset('storage/' . $cast->main_image_path )}}" alt="catprev">
+            @endempty
+
         </div>
         <div class="cursor-pointer">
-            <p class="mt-4">{{ $cast->cast_name }} ♂</p>
+            <p class="mt-4">{{ $cast->cast_name }} 
+                @if ($cast->gender === 1)
+                                ♂
+                            @else
+                                ♀
+                            @endif
+            </p>
         </div>
     </div>
     <!-- モーダル -->
@@ -31,20 +42,31 @@
                 </span>
             </div>
             <div>
-                <img class="rounded-lg" src="{{ asset('img/popup/2x/poppuup1@2x.jpg') }}" alt="cat">
+                @empty($cast->sub_image_path)
+                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
+                @else
+                <img class="rounded-lg" src="{{ asset('storage/' . $cast->sub_image_path )}}" alt="cat">
+                @endempty
             </div>
             <dl class="mt-4">
                 <div class="flex gap-4 my-1">
-                    <dt class="font-bold">名前</dt><dd>{{ $cast->cast_name }}　♂</dd>
+                    <dt class="font-bold">名前</dt>
+                    <dd>{{ $cast->cast_name }}　
+                        @if ($cast->gender === 1)
+                                ♂
+                            @else
+                                ♀
+                            @endif
+                        </dd>
                 </div>
                 <div class="flex gap-4 my-1">
-                    <dt class="font-bold">年齢</dt><dd>3歳</dd>
+                    <dt class="font-bold">年齢</dt><dd>{{ $cast->age }} 歳</dd>
                 </div>
                 <div class="flex gap-4 my-1">
-                    <dt class="font-bold">種類</dt><dd>エキゾチックショートヘア</dd>
+                    <dt class="font-bold">種類</dt><dd>{{ $cast->types }}</dd>
                 </div>
                 <div class="flex gap-4 my-1">
-                    <dt class="font-bold">性格</dt><dd>おっとり</dd>
+                    <dt class="font-bold">性格</dt><dd>{{ $cast->character }}</dd>
                 </div>
             </dl>
 
