@@ -20,6 +20,7 @@
             <main>
                 {{ $slot }}
             </main>
+            @include('layouts.footer')
         <script src="{{ asset('js/test.js') }}"></script>
     </body>
 </html>

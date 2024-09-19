@@ -3,9 +3,9 @@
     <!-- メインビジュアル -->
     <div>
       <img
-      src="{{asset('img/mainvisual011x.jpg')}}"
+      src="{{asset('img/grid5.jpg')}}"
       alt="main"
-      class="object-cover h-96 w-full "
+      class="object-cover h-fit w-full "
       />
     </div>
     <!-- concept -->
@@ -51,9 +51,10 @@
             <a href="https://goo.gl/maps/EmkYveF2nM8KhRkZ7" target="_blank">google map</a>
           </x-primary-button>
         </div>
-        
       </div>
     </section>
+
+
 
   </x-home-layout>
 </html>

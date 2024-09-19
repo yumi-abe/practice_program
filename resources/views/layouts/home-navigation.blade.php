@@ -3,9 +3,9 @@
         <div class="container mx-auto flex justify-between items-center px-8 md:px-8 lg:px-8 w-full">
 
           <h1 class="text-2xl text-center">
-            <a href="/">Catcafe <br> mofumofu</a> 
+            <a href="/"><img src="{{ asset('img/logo1x.png') }}" alt=""></a> 
         </h1>
-          <ul class="text-xl space-x-5 hidden md:flex items-center">
+          <ul class="text-xl space-x-5 hidden md:flex items-center font-bold">
             <li><a href="{{ url('/#news') }}" class="hover:text-body transition-all duration-300">news</a></li>
             <li><a href="{{ url('/#cast') }}" class="hover:text-body transition-all duration-300">cast</a></li>
             <li><a href="#price" class="hover:text-body transition-all duration-300">price</a></li>

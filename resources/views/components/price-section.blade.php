@@ -1,6 +1,5 @@
 <div class="text-center">
 <h2 class="text-2xl font-bold text-white ml- mb-7"><img class="mx-auto" src="{{ asset('img/price1x.png') }}" alt="news"></h2>
-
 </div>
 {{-- <section class="text-gray-600 body-font"> --}}
     <div class="container px-5 py-5 mx-auto">
