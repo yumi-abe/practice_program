@@ -31,10 +31,11 @@
       <x-cast-intoroduction />
     </section>
     
+    <!-- price -->
+    <section id="price" class="bg-body py-10">
+      <x-price-section />
+    </section>
 
-    {{-- </main> --}}
-
-    {{-- <script src="{{ asset('js/test.js') }}"></script> --}}
 
   </x-home-layout>
 </html>
