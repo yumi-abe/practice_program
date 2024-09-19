@@ -1,16 +1,20 @@
-@import 'flatpickr/dist/flatpickr.css';
+@import "flatpickr/dist/flatpickr.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .btn {
-    @apply font-bold py-2 px-4 rounded ml-10
+    @apply font-bold py-2 px-4 rounded ml-10;
 }
 
 .btn-blue {
-    @apply bg-blue-500 text-white
+    @apply bg-blue-500 text-white;
 }
 
 .btn-blue:hover {
-    @apply bg-blue-600
+    @apply bg-blue-600;
+}
+
+html {
+    scroll-behavior: smooth;
 }

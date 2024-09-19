@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Blog;
+use App\Models\CastCategory;
+use App\Models\PlanCategory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+            // $view->with('blogs', Blog::all());
+            $view->with('castProfile', CastCategory::all());
+            $view->with('planList', PlanCategory::all());
+        });
     }
 }

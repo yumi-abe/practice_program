@@ -37,6 +37,9 @@
         <x-nav-link :href="route('owner.blog.index')" :active="request()->routeIs('owner.blog.index')">
             {{ __('ブログ一覧') }}
         </x-nav-link>
+        <x-nav-link :href="route('owner.cast-list.index')" :active="request()->routeIs('owner.cast-list.index')">
+            {{ __('キャスト管理') }}
+        </x-nav-link>
         
     </div>
     

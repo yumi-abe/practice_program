@@ -20,10 +20,10 @@
             </div>
             <div class="mb-4 text-center">
                 <label class="block text-gray-700 text-sm font-bold my-2" for="imagePath">添付ファイル</label>
-                <input type="file" name="image_path" id="imagePath" accept="image/*">
+                <input type="file" name="image_path"  id="imagePath" class="image-input" accept="image/*">
                 <div class="flex mt-4 justify-center items-center gap-2">
-                    <img id="prevImage" class=" max-w-52 hidden">
-                    <button type="button" id="removeImage" class="mt-2 px-2 rounded border border-black hidden">削除</button>
+                    <img id="prevImage" class="image-preview max-w-52 hidden">
+                    <button type="button" id="removeImage" class="remove-image mt-2 px-2 rounded border border-black hidden">削除</button>
                 </div>
             </div>
             <div class="flex flex-col items-center gap-4 mb-10">

@@ -10,7 +10,13 @@ class CastCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cast_name'
+        'cast_name',
+        'gender',
+        'types',
+        'age',
+        'character',
+        'main_image_path',
+        'sub_image_path',
     ];
 
     public function ReserveForm()

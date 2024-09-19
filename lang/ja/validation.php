@@ -117,7 +117,7 @@ return [
     'attributes'           => [
         'address'                  => '住所',
         'affiliate_url'            => 'アフィリエイトURL',
-        'age'                      => '年',
+        'age'                      => '年齢',
         'amount'                   => '額',
         'area'                     => 'エリア',
         'available'                => '利用可能',
@@ -204,5 +204,8 @@ return [
         'start_time'               => '開始時間',
         'end_time'                 => '終了時間',
         'image_path'               => '添付ファイル',
+        'cast_name'                => '名前',
+        'types'                    => '種類',
+        'character'                => '性格',
     ],
 ];

@@ -88,6 +88,7 @@ class BookingController extends Controller
 
         $reserve = FormService::CheckAccess($id);
 
+
         $planId = $reserve->plan_category_id;
         $castsId = $reserve->cast_category_id;
 
@@ -122,6 +123,8 @@ class BookingController extends Controller
     {
         //ログイン中のIDを取得
         $user_id = Auth::id();
+        $plans = PlanCategory::get();
+        $casts = CastCategory::get();
 
 
         $reserve = FormService::CheckAccess($id);
@@ -129,7 +132,7 @@ class BookingController extends Controller
         $reserve->formated_startDate = Carbon::parse($reserve->start_date)->format('Y年n月j日 H:i');
         $reserve->formated_endDate = Carbon::parse($reserve->end_date)->format('H:i');
 
-        return view('booking.edit', compact('reserve',));
+        return view('booking.edit', compact('reserve', 'casts', 'plans'));
     }
 
     /**

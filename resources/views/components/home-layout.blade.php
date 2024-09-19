@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       @vite('resources/css/app.css')
+      <!-- Stack -->
+      @stack('custom-css')
+      @stack('custom-js')
     <title>CatCafe mofumofu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +20,7 @@
             <main>
                 {{ $slot }}
             </main>
+            @include('layouts.footer')
         <script src="{{ asset('js/test.js') }}"></script>
     </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReserveFormController;
 use App\Models\ReserveForm;
@@ -83,7 +84,17 @@ Route::prefix('reserve-list')
         Route::delete('/{id}/destroy', 'destroy')->name('destroy');
     });
 
-
+Route::prefix('cast-list')
+    ->middleware('auth:owners')
+    ->name('cast-list.')
+    ->controller(CastController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+    });
 
 
 

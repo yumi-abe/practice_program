@@ -6,8 +6,7 @@ use App\Models\Blog;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class BlogService
 {
@@ -34,7 +33,7 @@ class BlogService
         $attributes = $request->all();
 
         // 画像削除のリクエストがある場合
-        if ($request->has('remove_image')) {
+        if ($request->has('image_path_remove')) {
             if ($blog->image_path) {
                 Storage::disk('public')->delete($blog->image_path); // 画像を削除
                 $blog->image_path = '';  // データベースの画像パスを空にする
