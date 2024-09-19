@@ -13,6 +13,15 @@
         <h2 class="text-2xl font-bold text-brown-500 ml- mb-7">CAST</h2>
         <p>画像をクリックすると詳細が見れます</p>
     </div>
+       {{-- 管理者でログインしている場合は管理者ページのリンクを表示 --}}
+       @if (Auth::guard('owners')->check())
+       <div class="text-right mr-6">
+          <x-primary-button>
+            <a class="text-base" href="{{ route('owner.cast-list.index') }}">管理者ページへ</a>
+          </x-primary-button>
+       </div>
+        @endif
+
     <div class="sm:grid sm:grid-cols-3">
         @foreach ($castProfile as $cast)
         <!-- キャスト紹介部分 -->

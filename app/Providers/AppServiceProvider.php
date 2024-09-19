@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             // $view->with('blogs', Blog::all());
             $view->with('castProfile', CastCategory::all());
-            $view->with('plans', PlanCategory::all());
+            $view->with('planList', PlanCategory::all());
         });
     }
 }

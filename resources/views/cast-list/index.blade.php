@@ -11,6 +11,12 @@
                   </div>
               @endif
 
+              <div class="text-right max-w-7xl mb-4">
+                <x-primary-button>
+                  <a href="{{ url('/cast') }}">Castページを見る</a>
+                </x-primary-button>
+                </div>
+
               @if ($casts->isEmpty())
               <div class="bg-gray-200 rounded-lg text-center font-bold w-2/3 lg:w-1/3 mx-auto">
                 キャストが登録されていません。

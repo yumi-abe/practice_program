@@ -10,7 +10,7 @@
           <thead>
             <tr>
               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300"></th>
-              @foreach ( $plans as $plan )
+              @foreach ( $planList as $plan )
               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">{{ $plan->plan_name }}</th>
               @endforeach
             </tr>
@@ -18,13 +18,13 @@
           <tbody>
             <tr>
             <th class="px-4 py-3 border-t-2 border-gray-100 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">平日</th>
-              @foreach ( $plans as $plan )
+              @foreach ( $planList as $plan )
               <td class="px-4 py-3 border-t-2 border-gray-100 bg-gray-100">{{ number_format($plan->weekday_price) }}円</td>
               @endforeach
             </tr>
             <tr>
                 <th class="px-4 py-3 border-t-2 border-gray-100 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">休日</th>
-                  @foreach ( $plans as $plan )
+                  @foreach ( $planList as $plan )
                   <td class="px-4 py-3 border-t-2 border-gray-300 bg-gray-100">{{ number_format($plan->holiday_price) }}円</td>
                   @endforeach
                 </tr>

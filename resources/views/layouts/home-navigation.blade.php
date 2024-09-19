@@ -8,8 +8,8 @@
           <ul class="text-xl space-x-5 hidden md:flex items-center font-bold">
             <li><a href="{{ url('/#news') }}" class="hover:text-body transition-all duration-300">news</a></li>
             <li><a href="{{ url('/#cast') }}" class="hover:text-body transition-all duration-300">cast</a></li>
-            <li><a href="#price" class="hover:text-body transition-all duration-300">price</a></li>
-            <li><a href="#access" class="hover:text-body transition-all duration-300">access</a></li>
+            <li><a href="{{ url('/#price') }}" class="hover:text-body transition-all duration-300">price</a></li>
+            <li><a href="{{ url('/#access') }}" class="hover:text-body transition-all duration-300">access</a></li>
             <li><a href="{{ url('/login') }}">
               <button class="px-6 py-2 ml-4 bg-body rounded-lg hover:bg-pastel-pink hover:text-gray-600 transition-all duration-300">reserve</button>
             </a></li>
