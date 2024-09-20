@@ -94,6 +94,7 @@ Route::prefix('cast-list')
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}/desroy', 'destroy')->name('destroy');
     });
 
 
