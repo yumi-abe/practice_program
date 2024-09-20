@@ -25,7 +25,6 @@
                 <table class="table-auto w-4/5 lg:w-full text-left whitespace-no-wrap mx-auto">
                   <thead>
                     <tr>
-                      <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">ID</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">名前</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">種類</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">性別</th>
@@ -33,13 +32,12 @@
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">性格</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">メイン画像</th>
                       <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">サブ画像</th>
-                      <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300">詳細</th>
+                      <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-300"></th>
                     </tr>
                   </thead>
                   <tbody>
                       @foreach ( $casts as $cast )
                       <tr>
-                        <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->id }}</td>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->cast_name }}</td>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">{{ $cast->types }}</td>
                         <td class="border-t-2 border-body border-b-2 bg-gray-100 px-4 py-3">

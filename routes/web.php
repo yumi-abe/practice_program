@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReserveFormController;
@@ -42,10 +43,13 @@ Route::get('/reservations/events', function () {
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
-Route::get('/', [NewsController::class, 'home'])->name('home');
-Route::get('/cast', function () {
-    return view('cast');
-});
+// Route::get('/cast', function () {
+//     return view('cast');
+// });
+
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/cast', [HomeController::class, 'cast'])->name('cast');
+
 
 // Route::get('/', function () {
 //     return view('index');

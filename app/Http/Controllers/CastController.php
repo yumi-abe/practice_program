@@ -14,9 +14,8 @@ class CastController extends Controller
 {
     public function index()
     {
-        $casts = CastCategory::orderBy('id', 'asc')
-            ->paginate(10);
-
+        $casts = CastCategory::orderBy('id', 'desc')
+            ->paginate(6);
         return view('cast-list.index', compact('casts'));
     }
 
@@ -27,9 +26,6 @@ class CastController extends Controller
 
     public function store(StoreCastRequest $request)
     {
-
-        dd($request->main_image_path);
-
         $attributes = CastService::castStore($request);
 
         CastCategory::create($attributes);
