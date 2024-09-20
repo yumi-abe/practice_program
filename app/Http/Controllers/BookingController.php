@@ -88,20 +88,8 @@ class BookingController extends Controller
 
         $reserve = FormService::CheckAccess($id);
 
-
-        $planId = $reserve->plan_category_id;
-        $castsId = $reserve->cast_category_id;
-
-        // プラン、キャストカテゴリIDのクエリを準備する
-        $castsQuery = CastCategory::whereIn('id', range(1, 10)); // 1から10までのIDに対応する行を取得したい場合
-        $plansQuery = PlanCategory::whereIn('id', range(1, 10));
-
-        // 上記のIDに対応する行のidをキー、nameを値とする配列を取得
-        $plans = $plansQuery->pluck('plan_name', 'id');
-        $casts = $castsQuery->pluck('cast_name', 'id');
-
-        $plansId = $plans[$reserve->plan_category_id];
-        $castsId = $casts[$reserve->cast_category_id];
+        $plan = PlanCategory::find($reserve->plan_category_id);
+        $cast = CastCategory::find($reserve->cast_category_id);
 
         $today = Carbon::today()->format('Y年m月d日');
         $date = Carbon::parse($reserve->editEventDate)->format('Y年m月d日');
@@ -110,7 +98,7 @@ class BookingController extends Controller
 
         // dd($casts, $plans, $plansId, $castsId);
 
-        return view('booking.show', compact('reserve', 'plansId', 'castsId', 'date', 'today', 'previousDay'));
+        return view('booking.show', compact('reserve', 'plan', 'cast', 'date', 'today', 'previousDay'));
     }
 
     /**

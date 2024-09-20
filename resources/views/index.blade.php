@@ -28,7 +28,7 @@
 
     <!-- cast -->
     <section id="cast" class="bg-pastel-pink py-10">
-      <x-cast-intoroduction />
+      <x-cast-intoroduction-component :casts="$casts" />
     </section>
     
     <!-- price -->

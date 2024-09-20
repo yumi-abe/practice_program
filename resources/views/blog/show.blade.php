@@ -1,12 +1,8 @@
 <x-app-layout>
-
-  {{-- @push('custom-css')
-  <link rel="stylesheet" href="{{ asset('/css/swipe.css') }}">
-  @endpush
-
   @push('custom-js')
-  <script src="{{ asset('/js/swipe.js') }}"></script>
-  @endpush --}}
+  <script src="{{ asset('/js/previmage.js') }}"></script>
+  <script src="{{ asset('/js/confirm-message.js') }}"></script>
+@endpush
         <h2 class="font-semibold text-xl text-brown-500 leading-tight text-center mt-10">
              詳細
         </h2>
@@ -86,14 +82,4 @@
             </div>
         </div>
     </div>
-
-        {{-- 確認メッセージ --}}
-        <script>
-          function deletePost(e){
-              'use strict'
-              if(confirm('本当にキャンセルしてよろしいですか？')){
-                  document.getElementById('delete_' + e.dataset.id).submit()
-              }
-          }
-      </script>
 </x-home-layout>

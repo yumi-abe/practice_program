@@ -23,16 +23,20 @@
         @endif
 
     <div class="sm:grid sm:grid-cols-3">
-        @foreach ($castProfile as $cast)
+        @foreach ($casts as $cast)
         <!-- キャスト紹介部分 -->
         <div class="my-10 flex flex-col items-center">
             <div class="cursor-pointer" onclick="openModal('modal{{ $cast->id }}')">
                 @empty($cast->main_image_path)
                 <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
                 @else
-                <img src="{{ asset('storage/' . $cast->main_image_path )}}" alt="catprev">
+                <div class="relative">
+                    @if ($cast->isNew)
+                        <img class="absolute -top-5 -left-5 w-14" src="{{ asset('img/new.png')}}" alt="new">
+                    @endif
+                    <img src="{{ asset('storage/' . $cast->main_image_path )}}" alt="catprev">
+                </div>
                 @endempty
-
             </div>
             <div class="cursor-pointer">
                 <p class="mt-4">{{ $cast->cast_name }} 

@@ -22,13 +22,13 @@ class NewsController extends Controller
         return view('news.show', compact('blog'));
     }
 
-    public function home()
-    {
-        $blogs = Blog::orderBy('created_at', 'desc')
-            ->limit(3)
-            ->get();
-        // dd($blogs);
+    // public function home()
+    // {
+    //     $blogs = Blog::orderBy('created_at', 'desc')
+    //         ->limit(3)
+    //         ->get();
+    //     // dd($blogs);
 
-        return view('index', compact('blogs'));
-    }
+    //     return view('index', compact('blogs'));
+    // }
 }

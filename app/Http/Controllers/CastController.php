@@ -6,14 +6,16 @@ use App\Http\Requests\StoreCastRequest;
 use App\Models\CastCategory;
 use App\Services\CastService;
 use App\Services\ImageService;
+use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 
 class CastController extends Controller
 {
     public function index()
     {
-        $casts = CastCategory::orderBy('id', 'asc')
-            ->paginate(10);
-
+        $casts = CastCategory::orderBy('id', 'desc')
+            ->paginate(6);
         return view('cast-list.index', compact('casts'));
     }
 
@@ -24,9 +26,6 @@ class CastController extends Controller
 
     public function store(StoreCastRequest $request)
     {
-
-        dd($request->main_image_path);
-
         $attributes = CastService::castStore($request);
 
         CastCategory::create($attributes);
@@ -53,5 +52,26 @@ class CastController extends Controller
         session()->flash('status', '更新しました');
 
         return to_route('owner.cast-list.index');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $cast = CastCategory::findorFail($id);
+            $imagePath = ['main_image_path', 'sub_image_path'];
+
+            foreach ($imagePath as $path) {
+                if ($cast->imagePath) {
+                    Storage::disk('public')->delete($cast->$path);
+                }
+            }
+            $cast->delete();
+            session()->flash('status', '削除しました');
+            return to_route('owner.cast-list.index');
+        } catch (QueryException $e) {
+            return back()->withErrors('該当キャストに予約が入っているため削除できません。<br>予約を調整してください。');
+        } catch (Exception $e) {
+            return back()->withErrors('削除中にエラーが発生しました。');
+        }
     }
 }

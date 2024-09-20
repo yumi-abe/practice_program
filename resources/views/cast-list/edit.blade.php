@@ -1,12 +1,21 @@
 <x-app-layout>
     @push('custom-js')
         <script src="{{ asset('/js/previmage.js') }}"></script>
+        <script src="{{ asset('/js/confirm-message.js') }}"></script>
     @endpush
 
 <div class="py-12">
         <h2 class="text-brown-500 font-bold text-center text:xl mb-4">キャスト編集</h2>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-4/5 mx-auto">
-        <x-input-error class="my-4 text-center" :messages="$errors->all()"/>
+        @if ($errors->any())
+            <div class="text-sm text-red-600 space-y-1 my-4 text-center">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="post" action="{{ route('owner.cast-list.update', ['id' => $cast->id]) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -60,24 +69,20 @@
                     <button type="button" class="remove-image mt-2 px-2 rounded border border-black {{ $cast->sub_image_path ? '' : 'hidden' }}">削除</button>
                 </div>
             </div>
-
-            {{-- <div class="mb-4 text-center">
-                <label class="block text-gray-700 text-sm font-bold my-2" for="sub_image_path">サブ画像</label>
-                <input type="file" name="sub_image_path" id="sub_image_path" accept="image/*" class="image-input">
-                <div class="flex mt-4 justify-center items-center gap-2">
-                    <img class="image-preview max-w-52 hidden">
-                    <button type="button" class="remove-image mt-2 px-2 rounded border border-black hidden">削除</button>
-                </div>
-            </div> --}}
-            <div class="flex flex-col items-center gap-4 mb-10">
+            <div class="text-center">
                 <button type="submit" class="text-white bg-brown-500 border-0 py-2 px-8 focus:outline-none hover:bg-brown-400 rounded sm:text-lg font-bold">変更する</button>
-
-                <a href="{{ route('owner.cast-list.index') }}">
-                    <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold">戻る</button>
-                </a>
             </div>
-
         </form>
+        <div class="flex justify-center items-center gap-4 mt-6 mb-10">
+            <form id="delete_{{ $cast->id }}" method="post" action="{{ route('owner.cast-list.destroy', ['id' => $cast->id ])}}">
+                @csrf
+                @method('DELETE')
+                <a href="#" data-id="{{ $cast->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-base font-bold">削除する</a>
+              </form>
+            <a href="{{ route('owner.cast-list.index') }}">
+                <button type="button" class="text-white bg-gray-400 border-0 py-2 px-12 focus:outline-none hover:bg-gray-600 rounded text-base font-bold">戻る</button>
+            </a>
+        </div>
     </div>
 </div>
 
