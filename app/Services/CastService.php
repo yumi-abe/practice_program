@@ -61,28 +61,5 @@ class CastService
             }
         }
         return $attributes;
-
-
-
-        // // 画像削除のリクエストがある場合
-        // if ($request->has('image_path_remove')) {
-        //     if ($cast->image_path) {
-        //         Storage::disk('public')->delete($cast->image_path); // 画像を削除
-        //         $cast->image_path = '';  // データベースの画像パスを空にする
-        //     }
-        // } else {
-        //     // 新しい画像がアップロードされた場合
-        //     if ($request->hasFile('image_path')) {
-        //         if ($cast->image_path) {
-        //             Storage::disk('public')->delete($cast->image_path); // 古い画像を削除
-        //         }
-        //         $imagePath = $request->file('image_path')->store('images', 'public'); // 新しい画像を保存
-        //         $attributes['image_path'] = $imagePath; // 新しい画像パスを保存
-        //     } else {
-        //         // 画像がアップロードされていない場合、画像パスのフィールドを変更しない
-        //         unset($attributes['image_path']);
-        //     }
-        // }
-        // return $attributes;
     }
 }

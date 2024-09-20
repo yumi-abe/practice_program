@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCastRequest;
 use App\Models\CastCategory;
 use App\Services\CastService;
-use Illuminate\Http\Request;
+use App\Services\ImageService;
 
 class CastController extends Controller
 {
@@ -13,6 +13,7 @@ class CastController extends Controller
     {
         $casts = CastCategory::orderBy('id', 'asc')
             ->paginate(10);
+
         return view('cast-list.index', compact('casts'));
     }
 
@@ -23,6 +24,9 @@ class CastController extends Controller
 
     public function store(StoreCastRequest $request)
     {
+
+        dd($request->main_image_path);
+
         $attributes = CastService::castStore($request);
 
         CastCategory::create($attributes);
