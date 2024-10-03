@@ -18,7 +18,6 @@ class HomeController extends Controller
 
         $casts = CastCategory::orderBy('created_at', 'desc')->get();
 
-        CastService::isNew($casts);
 
         return view('index', compact('blogs', 'casts'));
     }
@@ -27,7 +26,6 @@ class HomeController extends Controller
     {
         $casts = CastCategory::orderBy('created_at', 'desc')->get();
 
-        CastService::isNew($casts);
 
         return view('cast', compact('casts'));
     }

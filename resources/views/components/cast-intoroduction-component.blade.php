@@ -1,12 +1,3 @@
-
-@push('custom-css')
-<link rel="stylesheet" href="{{ asset('/css/modal.css') }}">
-@endpush
-
-@push('custom-js')
-<script src="{{ asset('/js/modal.js') }}"></script>
-@endpush
-
 <div class="text-center">
     <h2 class="text-2xl font-bold text-brown-500 ml- mb-7">CAST</h2>
     <p>画像をクリックすると詳細が見れます</p>
@@ -20,7 +11,7 @@
             <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
             @else
             <div class="relative">
-                @if ($cast->isNew)
+                @if ($cast->isNew())
                     <img class="absolute -top-5 -left-5 w-14" src="{{ asset('img/new.png')}}" alt="new">
                 @endif
                 <img src="{{ asset('storage/' . $cast->main_image_path )}}" alt="catprev">
@@ -37,45 +28,8 @@
             </p>
         </div>
     </div>
-    <!-- モーダル -->
-    <div id="modal{{ $cast->id }}" class="modal z-10 w-full h-full fixed left-0 top-0  justify-center items-center hidden modal-hidden modal-transition"  style="background-color: rgba(128, 128, 128, 0.5);">
-        <div class="z-20 bg-body p-10 max-w-lg flex flex-col rounded-lg m-auto relative top-20 sm:top-10">
-            <div class="text-right text-4xl mb-2">
-                <span class="cursor-pointer" onclick="closeModal('modal{{ $cast->id }}')">
-                    <i class="fa-solid fa-xmark"></i>
-                </span>
-            </div>
-            <div>
-                @empty($cast->sub_image_path)
-                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
-                @else
-                <img class="rounded-lg" src="{{ asset('storage/' . $cast->sub_image_path )}}" alt="cat">
-                @endempty
-            </div>
-            <dl class="mt-4">
-                <div class="flex gap-4 my-1">
-                    <dt class="font-bold">名前</dt>
-                    <dd>{{ $cast->cast_name }}　
-                        @if ($cast->gender === 1)
-                                ♂
-                            @else
-                                ♀
-                            @endif
-                        </dd>
-                </div>
-                <div class="flex gap-4 my-1">
-                    <dt class="font-bold">年齢</dt><dd>{{ $cast->age }} 歳</dd>
-                </div>
-                <div class="flex gap-4 my-1">
-                    <dt class="font-bold">種類</dt><dd>{{ $cast->types }}</dd>
-                </div>
-                <div class="flex gap-4 my-1">
-                    <dt class="font-bold">性格</dt><dd>{{ $cast->character }}</dd>
-                </div>
-            </dl>
-
-        </div>
-    </div>
+    @include('components.cast-modal',['cast' => $cast])
+    
     @endforeach
 </div>
 @if ($casts->count() > 6)
