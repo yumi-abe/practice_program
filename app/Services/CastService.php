@@ -62,13 +62,4 @@ class CastService
         }
         return $attributes;
     }
-
-    public static function isNew($casts)
-    {
-        foreach ($casts as $cast) {
-            // 3日以内かどうかを判定
-            $cast->isNew = $cast->created_at->gt(Carbon::now()->subDays(3));
-            //  $cast->isNew = $cast->created_at->gt(Carbon::now()->subWeek());
-        }
-    }
 }

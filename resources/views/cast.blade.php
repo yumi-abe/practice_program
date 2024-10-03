@@ -31,7 +31,7 @@
                 <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('storage/images/noimage.png')}}" alt="noimage">
                 @else
                 <div class="relative">
-                    @if ($cast->isNew)
+                    @if ($cast->isNew())
                         <img class="absolute -top-5 -left-5 w-14" src="{{ asset('img/new.png')}}" alt="new">
                     @endif
                     <img src="{{ asset('storage/' . $cast->main_image_path )}}" alt="catprev">

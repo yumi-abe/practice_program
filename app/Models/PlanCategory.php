@@ -10,7 +10,9 @@ class PlanCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'plan_name'
+        'plan_name',
+        'weekday_price',
+        'holiday_price',
     ];
 
     public function ReserveForm()
