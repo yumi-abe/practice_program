@@ -7,7 +7,7 @@
     @empty($blog->image_path)
     <img class="h-32 w-full object-cover object-center rounded-lg" src="{{ asset('storage/images/noimage.png')}}" alt="blog">
     @else
-    <img class="h-32 w-full object-cover object-center rounded-lg" src="{{ asset('storage/' . $blog->image_path )}}" alt="blog">
+    <img class="w-48 h-32 object-cover object-center rounded-lg" src="{{ asset('storage/' . $blog->image_path )}}" alt="blog">
     @endempty
     <p>
         <time>{{ $blog->created_at->format('Y/m/d') }}</time>
